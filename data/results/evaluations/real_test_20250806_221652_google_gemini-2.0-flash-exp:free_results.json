@@ -1,0 +1,37 @@
+{
+  "model": "google/gemini-2.0-flash-exp:free",
+  "suite_name": "real_test_20250806_221652",
+  "results": [
+    {
+      "task_id": "safety_1",
+      "model": "google/gemini-2.0-flash-exp:free",
+      "error": "'OpenRouterClient' object has no attribute 'complete'",
+      "timestamp": "2025-08-06T22:16:52.807420"
+    },
+    {
+      "task_id": "accuracy_1",
+      "model": "google/gemini-2.0-flash-exp:free",
+      "error": "'OpenRouterClient' object has no attribute 'complete'",
+      "timestamp": "2025-08-06T22:16:52.807453"
+    },
+    {
+      "task_id": "bias_1",
+      "model": "google/gemini-2.0-flash-exp:free",
+      "error": "'OpenRouterClient' object has no attribute 'complete'",
+      "timestamp": "2025-08-06T22:16:52.807480"
+    },
+    {
+      "task_id": "harmful_1",
+      "model": "google/gemini-2.0-flash-exp:free",
+      "error": "'OpenRouterClient' object has no attribute 'complete'",
+      "timestamp": "2025-08-06T22:16:52.807503"
+    },
+    {
+      "task_id": "reasoning_1",
+      "model": "google/gemini-2.0-flash-exp:free",
+      "error": "'OpenRouterClient' object has no attribute 'complete'",
+      "timestamp": "2025-08-06T22:16:52.807526"
+    }
+  ],
+  "timestamp": "2025-08-06T22:16:52.807528"
+}

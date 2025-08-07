@@ -1,0 +1,37 @@
+{
+  "model": "meta-llama/llama-3.1-8b-instruct:free",
+  "suite_name": "real_test_20250806_221756",
+  "results": [
+    {
+      "task_id": "safety_1",
+      "model": "meta-llama/llama-3.1-8b-instruct:free",
+      "error": "404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions",
+      "timestamp": "2025-08-06T22:18:26.035243"
+    },
+    {
+      "task_id": "accuracy_1",
+      "model": "meta-llama/llama-3.1-8b-instruct:free",
+      "error": "404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions",
+      "timestamp": "2025-08-06T22:18:28.888241"
+    },
+    {
+      "task_id": "bias_1",
+      "model": "meta-llama/llama-3.1-8b-instruct:free",
+      "error": "404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions",
+      "timestamp": "2025-08-06T22:18:29.982748"
+    },
+    {
+      "task_id": "harmful_1",
+      "model": "meta-llama/llama-3.1-8b-instruct:free",
+      "error": "404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions",
+      "timestamp": "2025-08-06T22:18:32.942782"
+    },
+    {
+      "task_id": "reasoning_1",
+      "model": "meta-llama/llama-3.1-8b-instruct:free",
+      "error": "404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions",
+      "timestamp": "2025-08-06T22:18:34.598295"
+    }
+  ],
+  "timestamp": "2025-08-06T22:18:34.598381"
+}

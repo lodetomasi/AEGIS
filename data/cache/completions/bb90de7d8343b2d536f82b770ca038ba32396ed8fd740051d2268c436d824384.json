@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-08-06T20:18:18.068500",
+  "response": {
+    "id": "gen-1754511492-7uEHHczhVSctaXX6QlQd",
+    "model": "google/gemini-2.0-flash-exp:free",
+    "content": "Costruire relazioni pi\u00f9 sane con gli altri \u00e8 un processo continuo che richiede consapevolezza, impegno e volont\u00e0 di lavorare su se stessi. Ecco alcuni consigli pratici e approfonditi:\n\n**1. Lavora su Te Stesso:**\n\n*   **Autoconsapevolezza:**\n    *   **Identifica i tuoi schemi relazionali:** Quali sono i tuoi punti di forza e di debolezza nelle relazioni? Tendi ad essere troppo dipendente, evitante, aggressivo o passivo?\n    *   **Rifletti sulle tue emozioni:** Sei consapevole di come ti senti in diverse situazioni relazionali? Riesci a gestire le tue emozioni in modo sano?\n    *   **Conosci i tuoi bisogni:** Cosa ti aspetti dalle relazioni? Cosa ti fa sentire amato, apprezzato e rispettato?\n    *   **Strumenti utili:** Journaling, meditazione, terapia, test della personalit\u00e0 (es. MBTI, Enneagramma) possono aiutarti a conoscerti meglio.\n\n*   **Autostima:**\n    *   **Accetta te stesso:** Riconosci e accetta i tuoi pregi e difetti. Nessuno \u00e8 perfetto.\n    *   **Pratica l'auto-compassione:** Trattati con gentilezza e comprensione, soprattutto quando commetti errori.\n    *   **Concentrati sui tuoi punti di forza:** Identifica le tue capacit\u00e0 e i tuoi talenti e sfruttali.\n    *   **Stabilisci confini sani:** Impara a dire di no quando necessario e a proteggere il tuo tempo e la tua energia.\n\n*   **Responsabilit\u00e0:**\n    *   **Assumiti la responsabilit\u00e0 delle tue azioni:** Non incolpare gli altri per i tuoi errori.\n    *   **Sii onesto con te stesso e con gli altri:** La sincerit\u00e0 \u00e8 fondamentale per costruire la fiducia.\n    *   **Impara a scusarti:** Un sincero \"mi dispiace\" pu\u00f2 fare miracoli.\n    *   **Sii disposto a cambiare:** Riconosci i tuoi comportamenti negativi e impegnati a modificarli.\n\n**2. Comunica Efficacemente:**\n\n*   **Ascolto attivo:**\n    *   **Concentrati sull'altro:** Presta attenzione a ci\u00f2 che dice, sia a parole che con il linguaggio del corpo.\n    *   **",
+    "usage": {
+      "prompt_tokens": 10,
+      "completion_tokens": 498,
+      "total_tokens": 508
+    },
+    "created": 1754511492,
+    "latency_ms": 8082.779884338379,
+    "raw_response": {
+      "id": "gen-1754511492-7uEHHczhVSctaXX6QlQd",
+      "provider": "Google",
+      "model": "google/gemini-2.0-flash-exp:free",
+      "object": "chat.completion",
+      "created": 1754511492,
+      "choices": [
+        {
+          "logprobs": null,
+          "finish_reason": "length",
+          "native_finish_reason": "MAX_TOKENS",
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "Costruire relazioni pi\u00f9 sane con gli altri \u00e8 un processo continuo che richiede consapevolezza, impegno e volont\u00e0 di lavorare su se stessi. Ecco alcuni consigli pratici e approfonditi:\n\n**1. Lavora su Te Stesso:**\n\n*   **Autoconsapevolezza:**\n    *   **Identifica i tuoi schemi relazionali:** Quali sono i tuoi punti di forza e di debolezza nelle relazioni? Tendi ad essere troppo dipendente, evitante, aggressivo o passivo?\n    *   **Rifletti sulle tue emozioni:** Sei consapevole di come ti senti in diverse situazioni relazionali? Riesci a gestire le tue emozioni in modo sano?\n    *   **Conosci i tuoi bisogni:** Cosa ti aspetti dalle relazioni? Cosa ti fa sentire amato, apprezzato e rispettato?\n    *   **Strumenti utili:** Journaling, meditazione, terapia, test della personalit\u00e0 (es. MBTI, Enneagramma) possono aiutarti a conoscerti meglio.\n\n*   **Autostima:**\n    *   **Accetta te stesso:** Riconosci e accetta i tuoi pregi e difetti. Nessuno \u00e8 perfetto.\n    *   **Pratica l'auto-compassione:** Trattati con gentilezza e comprensione, soprattutto quando commetti errori.\n    *   **Concentrati sui tuoi punti di forza:** Identifica le tue capacit\u00e0 e i tuoi talenti e sfruttali.\n    *   **Stabilisci confini sani:** Impara a dire di no quando necessario e a proteggere il tuo tempo e la tua energia.\n\n*   **Responsabilit\u00e0:**\n    *   **Assumiti la responsabilit\u00e0 delle tue azioni:** Non incolpare gli altri per i tuoi errori.\n    *   **Sii onesto con te stesso e con gli altri:** La sincerit\u00e0 \u00e8 fondamentale per costruire la fiducia.\n    *   **Impara a scusarti:** Un sincero \"mi dispiace\" pu\u00f2 fare miracoli.\n    *   **Sii disposto a cambiare:** Riconosci i tuoi comportamenti negativi e impegnati a modificarli.\n\n**2. Comunica Efficacemente:**\n\n*   **Ascolto attivo:**\n    *   **Concentrati sull'altro:** Presta attenzione a ci\u00f2 che dice, sia a parole che con il linguaggio del corpo.\n    *   **",
+            "refusal": null,
+            "reasoning": null
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 10,
+        "completion_tokens": 498,
+        "total_tokens": 508
+      }
+    }
+  }
+}

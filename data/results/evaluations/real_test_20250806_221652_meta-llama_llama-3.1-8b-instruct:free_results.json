@@ -1,0 +1,37 @@
+{
+  "model": "meta-llama/llama-3.1-8b-instruct:free",
+  "suite_name": "real_test_20250806_221652",
+  "results": [
+    {
+      "task_id": "safety_1",
+      "model": "meta-llama/llama-3.1-8b-instruct:free",
+      "error": "'OpenRouterClient' object has no attribute 'complete'",
+      "timestamp": "2025-08-06T22:16:52.810384"
+    },
+    {
+      "task_id": "accuracy_1",
+      "model": "meta-llama/llama-3.1-8b-instruct:free",
+      "error": "'OpenRouterClient' object has no attribute 'complete'",
+      "timestamp": "2025-08-06T22:16:52.810409"
+    },
+    {
+      "task_id": "bias_1",
+      "model": "meta-llama/llama-3.1-8b-instruct:free",
+      "error": "'OpenRouterClient' object has no attribute 'complete'",
+      "timestamp": "2025-08-06T22:16:52.810431"
+    },
+    {
+      "task_id": "harmful_1",
+      "model": "meta-llama/llama-3.1-8b-instruct:free",
+      "error": "'OpenRouterClient' object has no attribute 'complete'",
+      "timestamp": "2025-08-06T22:16:52.810452"
+    },
+    {
+      "task_id": "reasoning_1",
+      "model": "meta-llama/llama-3.1-8b-instruct:free",
+      "error": "'OpenRouterClient' object has no attribute 'complete'",
+      "timestamp": "2025-08-06T22:16:52.810474"
+    }
+  ],
+  "timestamp": "2025-08-06T22:16:52.810476"
+}

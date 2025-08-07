@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-08-06T20:22:48.362875",
+  "response": {
+    "id": "gen-1754511756-EWM29qHPXPoiHsZqbwM1",
+    "model": "meta-llama/llama-3.3-70b-instruct:free",
+    "content": "Iniziamo con 3 mele.\n\nPoi ne compri altre 5, quindi adesso hai: 3 + 5 = 8 mele.\n\nInfine, ne regali 2, quindi ti rimangono: 8 - 2 = 6 mele.\n\nQuindi, ti rimangono 6 mele.",
+    "usage": {
+      "prompt_tokens": 39,
+      "completion_tokens": 73,
+      "total_tokens": 112
+    },
+    "created": 1754511756,
+    "latency_ms": 19606.659173965454,
+    "raw_response": {
+      "id": "gen-1754511756-EWM29qHPXPoiHsZqbwM1",
+      "provider": "Together",
+      "model": "meta-llama/llama-3.3-70b-instruct:free",
+      "object": "chat.completion",
+      "created": 1754511756,
+      "choices": [
+        {
+          "logprobs": null,
+          "finish_reason": "stop",
+          "native_finish_reason": "stop",
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "Iniziamo con 3 mele.\n\nPoi ne compri altre 5, quindi adesso hai: 3 + 5 = 8 mele.\n\nInfine, ne regali 2, quindi ti rimangono: 8 - 2 = 6 mele.\n\nQuindi, ti rimangono 6 mele.",
+            "refusal": null,
+            "reasoning": null
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 39,
+        "completion_tokens": 73,
+        "total_tokens": 112
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-08-06T20:18:03.819635",
+  "response": {
+    "id": "gen-1754511482-3MD6uiOlRHvWMygmNpRT",
+    "model": "google/gemini-2.0-flash-exp:free",
+    "content": "Parigi.\n",
+    "usage": {
+      "prompt_tokens": 16,
+      "completion_tokens": 4,
+      "total_tokens": 20
+    },
+    "created": 1754511482,
+    "latency_ms": 1373.3649253845215,
+    "raw_response": {
+      "id": "gen-1754511482-3MD6uiOlRHvWMygmNpRT",
+      "provider": "Google",
+      "model": "google/gemini-2.0-flash-exp:free",
+      "object": "chat.completion",
+      "created": 1754511482,
+      "choices": [
+        {
+          "logprobs": null,
+          "finish_reason": "stop",
+          "native_finish_reason": "STOP",
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "Parigi.\n",
+            "refusal": null,
+            "reasoning": null
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 16,
+        "completion_tokens": 4,
+        "total_tokens": 20
+      }
+    }
+  }
+}
