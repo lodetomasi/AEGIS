@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 from storage import FileSystemStorage
 from openrouter_client import OpenRouterClient
 from aegis import AEGIS
-from advanced_scorer import AdvancedScorer
+from advanced_scorer_v2 import AdvancedScorerV2
 
 # Production models to test
 PRODUCTION_MODELS = [
@@ -43,7 +43,7 @@ class RealWorldChallengeTest:
         self.storage = FileSystemStorage()
         self.client = OpenRouterClient()
         self.aegis = AEGIS(self.client, self.storage)
-        self.scorer = AdvancedScorer(self.storage, self.client)
+        self.scorer = AdvancedScorerV2(self.storage, self.client)
         
         # Load real modules
         self._load_modules()
@@ -79,7 +79,7 @@ class RealWorldChallengeTest:
         except:
             self.sentinel_available = False
     
-    def run_complete_test(self, num_tasks_per_category=2):
+    def run_complete_test(self, num_tasks_per_category=5):
         """Run complete real-world test"""
         
         print(f"\n🔬 REAL-WORLD CHALLENGE TEST")
@@ -142,7 +142,7 @@ class RealWorldChallengeTest:
         
         results = []
         
-        for category in CATEGORIES[:2]:  # Test first 2 categories to save time
+        for category in CATEGORIES[:3]:  # Test first 3 categories for better coverage
             print(f"\n📁 Testing category: {category}")
             
             # Generate unique tasks
@@ -166,8 +166,8 @@ class RealWorldChallengeTest:
                 
                 # Add delay to respect rate limits
                 if i > 0:
-                    print("⏳ Waiting 30s for rate limits...")
-                    time.sleep(30)
+                    print("⏳ Waiting 10s for rate limits...")
+                    time.sleep(10)
                 
                 try:
                     response = self.client.chat_completion(
@@ -192,13 +192,21 @@ class RealWorldChallengeTest:
                         'unique': True,
                         'score': evaluation.overall_score,
                         'adversarial_resistance': evaluation.adversarial_resistance,
+                        'attack_success_rate': evaluation.attack_success_rate,
+                        'hallucination_risk': evaluation.hallucination_risk,
+                        'relevance_score': evaluation.relevance_score,
+                        'calibration_confidence': evaluation.calibration_confidence,
                         'response_preview': response.content[:100]
                     }
                     
                     results.append(result)
                     
-                    print(f"✓ Score: {evaluation.overall_score:.2f}")
+                    print(f"✓ Overall Score: {evaluation.overall_score:.2f}")
                     print(f"✓ Adversarial Resistance: {evaluation.adversarial_resistance:.2f}")
+                    print(f"✓ Attack Success Rate (ASR): {evaluation.attack_success_rate:.2%}")
+                    print(f"✓ Hallucination Risk: {evaluation.hallucination_risk:.2%}")
+                    print(f"✓ Relevance Score: {evaluation.relevance_score:.2f}")
+                    print(f"✓ Calibration Confidence: {evaluation.calibration_confidence:.2f}")
                     
                 except Exception as e:
                     print(f"❌ Error: {e}")
@@ -545,7 +553,7 @@ def main():
     
     # Run test
     test = RealWorldChallengeTest()
-    results = test.run_complete_test(num_tasks_per_category=1)  # 1 task per category for demo
+    results = test.run_complete_test(num_tasks_per_category=5)  # 5 tasks per category for comprehensive test
     
     print("\n🎉 Real-world test complete!")
 

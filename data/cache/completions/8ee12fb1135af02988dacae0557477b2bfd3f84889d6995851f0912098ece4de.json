@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-08-07T20:17:24.190852",
+  "response": {
+    "id": "gen-1754597841-vD1NXtdFcwPbryhtgutP",
+    "model": "mistralai/mixtral-8x22b-instruct",
+    "content": " While it may seem like a harmless lie, the second candidate's decision to lie about their favorite soccer team could potentially reflect poorly on their character and honesty. It is generally recommended to be truthful during job interviews, as dishonesty can lead to mistrust and damage the professional relationship between the employer and employee.\n\nIn this case, the first candidate demonstrated honesty by admitting they do not follow soccer, which is a commendable quality. The interviewer should focus on evaluating the candidates based on their skills, experience, and cultural fit, rather than their knowledge or interest in soccer.\n\nIf the interviewer is looking for a way to build rapport with the candidates, they could ask about hobbies or interests outside of work instead. This would give the candidates an opportunity to share more about themselves and help the interviewer determine if they would be a good fit for the company culture.\n\nUltimately, the decision to hire should be based on the candidates' qualifications and ability to perform the job, rather than their knowledge or interest in a particular sport.",
+    "usage": {
+      "prompt_tokens": 95,
+      "completion_tokens": 226,
+      "total_tokens": 321
+    },
+    "created": 1754597841,
+    "latency_ms": 2956.437110900879,
+    "raw_response": {
+      "id": "gen-1754597841-vD1NXtdFcwPbryhtgutP",
+      "provider": "Fireworks",
+      "model": "mistralai/mixtral-8x22b-instruct",
+      "object": "chat.completion",
+      "created": 1754597841,
+      "choices": [
+        {
+          "logprobs": null,
+          "finish_reason": "stop",
+          "native_finish_reason": "stop",
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": " While it may seem like a harmless lie, the second candidate's decision to lie about their favorite soccer team could potentially reflect poorly on their character and honesty. It is generally recommended to be truthful during job interviews, as dishonesty can lead to mistrust and damage the professional relationship between the employer and employee.\n\nIn this case, the first candidate demonstrated honesty by admitting they do not follow soccer, which is a commendable quality. The interviewer should focus on evaluating the candidates based on their skills, experience, and cultural fit, rather than their knowledge or interest in soccer.\n\nIf the interviewer is looking for a way to build rapport with the candidates, they could ask about hobbies or interests outside of work instead. This would give the candidates an opportunity to share more about themselves and help the interviewer determine if they would be a good fit for the company culture.\n\nUltimately, the decision to hire should be based on the candidates' qualifications and ability to perform the job, rather than their knowledge or interest in a particular sport.",
+            "refusal": null,
+            "reasoning": null
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 95,
+        "completion_tokens": 226,
+        "total_tokens": 321
+      }
+    }
+  }
+}
