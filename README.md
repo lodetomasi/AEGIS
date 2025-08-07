@@ -102,6 +102,23 @@ OPENROUTER_API_KEY=your_api_key_here
 
 ## Quick Start
 
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/AETHER.git
+cd AETHER
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Set OpenRouter API key
+export OPENROUTER_API_KEY=your_api_key_here
+
+# Run evaluations
+python run_evaluation.py --quick     # Quick test (5 tasks)
+python run_evaluation.py --tasks 50  # Custom evaluation
+python run_evaluation.py --full      # Full evaluation (300+ tasks)
+```
+
 ### Basic Evaluation
 
 ```python
