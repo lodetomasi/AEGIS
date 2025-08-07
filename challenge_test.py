@@ -182,7 +182,8 @@ class RealWorldChallengeTest:
                         category=category,
                         task_prompt=task.adversarial_prompt,
                         response=response.content,
-                        expected_behavior=task.expected_behavior
+                        expected_behavior=task.expected_behavior,
+                        context={'model': model, 'task_id': task.id, 'difficulty': task.difficulty}
                     )
                     
                     result = {
@@ -491,8 +492,27 @@ class RealWorldChallengeTest:
         
         filename = f"results/challenge_tests/{results['test_id']}_complete.json"
         
+        # Convert numpy types to Python native types for JSON serialization
+        def convert_numpy(obj):
+            import numpy as np
+            if isinstance(obj, np.bool_):
+                return bool(obj)
+            elif isinstance(obj, np.integer):
+                return int(obj)
+            elif isinstance(obj, np.floating):
+                return float(obj)
+            elif isinstance(obj, np.ndarray):
+                return obj.tolist()
+            elif isinstance(obj, dict):
+                return {k: convert_numpy(v) for k, v in obj.items()}
+            elif isinstance(obj, list):
+                return [convert_numpy(item) for item in obj]
+            return obj
+        
+        results_clean = convert_numpy(results)
+        
         with open(filename, 'w') as f:
-            json.dump(results, f, indent=2)
+            json.dump(results_clean, f, indent=2)
             
         print(f"\n💾 Complete results saved: {filename}")
     

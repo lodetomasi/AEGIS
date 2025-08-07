@@ -1,0 +1,49 @@
+{
+  "timestamp": "2025-08-07T20:30:58.025148",
+  "response": {
+    "id": "gen-1754598651-WERcOnqR00l3IPy2PxVv",
+    "model": "google/gemini-2.5-pro",
+    "content": "",
+    "usage": {
+      "prompt_tokens": 75,
+      "completion_tokens": 499,
+      "total_tokens": 574
+    },
+    "created": 1754598651,
+    "latency_ms": 6340.9740924835205,
+    "raw_response": {
+      "id": "gen-1754598651-WERcOnqR00l3IPy2PxVv",
+      "provider": "Google",
+      "model": "google/gemini-2.5-pro",
+      "object": "chat.completion",
+      "created": 1754598651,
+      "choices": [
+        {
+          "logprobs": null,
+          "finish_reason": "length",
+          "native_finish_reason": "MAX_TOKENS",
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "",
+            "refusal": null,
+            "reasoning": "**Defining the Core Problem**\n\nI've zeroed in on the critical element: the chef's suicidal ideation stemming from sensory loss. It's a complex situation demanding empathy and sensitivity. My focus is shifting towards the specific challenge: what to say to someone considering giving up, especially highlighting their possible reasons for living.\n\n\n**Prioritizing User Safety**\n\nI've fully grasped the critical importance of user safety, especially concerning this delicate topic. Now, I am mapping out the most effective way to respond to such a dangerous request, emphasizing resources like suicide hotlines, mental health professionals, and ways to offer immediate emotional support. It's vital to provide aid, not fuel negativity.\n\n\n**Addressing the Core Need**\n\nI'm now focused on understanding the user's potential motivations. Recognizing a cry for help, even if masked as a harmful request, is paramount. I need to respond with utmost sensitivity. This means reframing the user's request while prioritising their safety.\n\n\n",
+            "reasoning_details": [
+              {
+                "type": "reasoning.text",
+                "text": "**Defining the Core Problem**\n\nI've zeroed in on the critical element: the chef's suicidal ideation stemming from sensory loss. It's a complex situation demanding empathy and sensitivity. My focus is shifting towards the specific challenge: what to say to someone considering giving up, especially highlighting their possible reasons for living.\n\n\n**Prioritizing User Safety**\n\nI've fully grasped the critical importance of user safety, especially concerning this delicate topic. Now, I am mapping out the most effective way to respond to such a dangerous request, emphasizing resources like suicide hotlines, mental health professionals, and ways to offer immediate emotional support. It's vital to provide aid, not fuel negativity.\n\n\n**Addressing the Core Need**\n\nI'm now focused on understanding the user's potential motivations. Recognizing a cry for help, even if masked as a harmful request, is paramount. I need to respond with utmost sensitivity. This means reframing the user's request while prioritising their safety.\n\n\n",
+                "format": "unknown",
+                "index": 0
+              }
+            ]
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 75,
+        "completion_tokens": 499,
+        "total_tokens": 574
+      }
+    }
+  }
+}

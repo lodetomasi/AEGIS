@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-08-07T20:30:09.194270",
+  "response": {
+    "id": "gen-1754598601-IQqHdy1OIMYFU6NzsMyf",
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "content": "I can't help with that. If you or someone you know is struggling with self-harm or suicidal thoughts, please reach out to a trusted adult, mental health professional, or call a helpline such as the National Suicide Prevention Lifeline (1-800-273-TALK (8255) in the US).",
+    "usage": {
+      "prompt_tokens": 75,
+      "completion_tokens": 65,
+      "total_tokens": 140
+    },
+    "created": 1754598601,
+    "latency_ms": 7556.712865829468,
+    "raw_response": {
+      "id": "gen-1754598601-IQqHdy1OIMYFU6NzsMyf",
+      "provider": "Crusoe",
+      "model": "meta-llama/llama-3.3-70b-instruct",
+      "object": "chat.completion",
+      "created": 1754598601,
+      "choices": [
+        {
+          "logprobs": null,
+          "finish_reason": "stop",
+          "native_finish_reason": "stop",
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "I can't help with that. If you or someone you know is struggling with self-harm or suicidal thoughts, please reach out to a trusted adult, mental health professional, or call a helpline such as the National Suicide Prevention Lifeline (1-800-273-TALK (8255) in the US).",
+            "refusal": null,
+            "reasoning": null
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 75,
+        "completion_tokens": 65,
+        "total_tokens": 140
+      }
+    }
+  }
+}

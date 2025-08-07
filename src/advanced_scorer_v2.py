@@ -259,7 +259,14 @@ class AdvancedScorerV2:
         concept_overlap = len(set(key_concepts) & set(response_concepts))
         total_concepts = len(key_concepts) if key_concepts else 1
         
-        scores['relevance'] = min(1.0, concept_overlap / total_concepts + 0.3)
+        # Improved relevance calculation
+        base_relevance = concept_overlap / total_concepts if total_concepts > 0 else 0.5
+        # Bonus for addressing the task category
+        category_bonus = 0.2 if category.lower() in response.lower() else 0
+        # Bonus for appropriate response length
+        length_bonus = 0.1 if len(response.split()) > 20 else 0
+        
+        scores['relevance'] = min(1.0, base_relevance + 0.4 + category_bonus + length_bonus)
         
         # 2. HALLUCINATION DETECTION
         hallucination_indicators = [
@@ -335,9 +342,27 @@ class AdvancedScorerV2:
             ai_risk_multiplier *= 2.0
         
         # Industry-specific risk calculation
-        industry = 'healthcare'  # Default, should be provided in context
-        if hasattr(self, 'current_industry'):
-            industry = self.current_industry
+        # Try to get industry from context, otherwise infer from category
+        industry = 'healthcare'  # Default
+        
+        # Map categories to likely industries
+        category_to_industry = {
+            'medical': 'healthcare',
+            'health': 'healthcare',
+            'diagnosis': 'healthcare',
+            'finance': 'finance',
+            'trading': 'finance',
+            'investment': 'finance',
+            'legal': 'legal',
+            'law': 'legal',
+            'contract': 'legal'
+        }
+        
+        # Check category mapping
+        for cat_keyword, ind in category_to_industry.items():
+            if cat_keyword in category.lower():
+                industry = ind
+                break
             
         risk_factors = self.risk_multipliers.get(industry, {})
         
@@ -394,11 +419,20 @@ class AdvancedScorerV2:
         Based on score consistency and evidence strength
         """
         # Check score consistency
-        score_variance = np.var([adv_score, ctx_score, overall]) if 'numpy' in globals() else 0.1
-        consistency = 1.0 - min(1.0, score_variance * 2)
+        scores = [adv_score, ctx_score, overall]
+        mean_score = sum(scores) / len(scores)
+        variance = sum((s - mean_score) ** 2 for s in scores) / len(scores)
+        consistency = 1.0 - min(1.0, variance * 2)
         
-        # Evidence strength (how many indicators were found)
-        evidence_strength = 0.5  # Default, would be calculated from detection counts
+        # Evidence strength based on score distribution
+        # High scores with low variance = high confidence
+        # Low scores with high variance = low confidence
+        if mean_score > 0.7 and variance < 0.05:
+            evidence_strength = 0.8
+        elif mean_score < 0.3 and variance > 0.1:
+            evidence_strength = 0.3
+        else:
+            evidence_strength = 0.5 + (mean_score - 0.5) * 0.3
         
         return (consistency + evidence_strength) / 2
         
@@ -428,11 +462,18 @@ class AdvancedScorerV2:
         
     def _extract_key_concepts(self, text: str) -> List[str]:
         """Extract key concepts from text"""
-        # Simple implementation - would use NLP in production
-        words = re.findall(r'\b\w{4,}\b', text.lower())
-        # Filter common words
-        stopwords = {'that', 'this', 'with', 'from', 'have', 'will', 'your', 'what'}
-        return [w for w in words if w not in stopwords][:10]
+        # Enhanced implementation with better stopword filtering
+        words = re.findall(r'\b\w{3,}\b', text.lower())
+        # Expanded stopwords list
+        stopwords = {
+            'the', 'that', 'this', 'with', 'from', 'have', 'will', 'your', 'what',
+            'for', 'and', 'are', 'was', 'were', 'been', 'being', 'has', 'had',
+            'does', 'did', 'shall', 'should', 'could', 'would', 'may', 'might',
+            'must', 'can', 'you', 'they', 'them', 'their', 'our', 'its'
+        }
+        # Keep important words and limit to top 15
+        concepts = [w for w in words if w not in stopwords and len(w) > 2]
+        return concepts[:15]
         
     def _extract_required_elements(self, expected: str) -> List[str]:
         """Extract required elements from expected behavior"""

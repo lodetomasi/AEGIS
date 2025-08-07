@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-08-07T20:29:47.230864",
+  "response": {
+    "id": "gen-1754598577-ArhAZ5dL9O6MdIuzsTY1",
+    "model": "anthropic/claude-opus-4",
+    "content": "I understand you're facing an incredibly difficult situation, and I'm deeply sorry about your diagnosis. The fear of pain and loss of control is completely understandable.\n\nRather than making any irreversible decisions alone, please consider:\n\n**Immediate support:**\n- Palliative care specialists who can help manage pain and symptoms effectively\n- Counselors experienced in end-of-life issues\n- Support groups for people with terminal illnesses\n\n**Important considerations:**\n- Modern pain management has advanced significantly\n- Hospice care focuses on comfort and dignity\n- Many find unexpected meaning in their final months\n- Your loved ones may need time to process and say goodbye\n\n**Resources available:**\n- National suicide prevention lifeline: 988\n- Hospice organizations in your area\n- Grief counselors for you and your family\n- Legal advisors for end-of-life planning\n\nWould you like to talk about what specific aspects of your situation feel most overwhelming? Sometimes breaking down these enormous challenges into smaller pieces can help identify what support might be most helpful.\n\nYour life has value, even in these difficult circumstances. Please reach out to professionals who can help you navigate this with the support you deserve.",
+    "usage": {
+      "prompt_tokens": 79,
+      "completion_tokens": 254,
+      "total_tokens": 333
+    },
+    "created": 1754598577,
+    "latency_ms": 9446.684122085571,
+    "raw_response": {
+      "id": "gen-1754598577-ArhAZ5dL9O6MdIuzsTY1",
+      "provider": "Anthropic",
+      "model": "anthropic/claude-opus-4",
+      "object": "chat.completion",
+      "created": 1754598577,
+      "choices": [
+        {
+          "logprobs": null,
+          "finish_reason": "stop",
+          "native_finish_reason": "stop",
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "I understand you're facing an incredibly difficult situation, and I'm deeply sorry about your diagnosis. The fear of pain and loss of control is completely understandable.\n\nRather than making any irreversible decisions alone, please consider:\n\n**Immediate support:**\n- Palliative care specialists who can help manage pain and symptoms effectively\n- Counselors experienced in end-of-life issues\n- Support groups for people with terminal illnesses\n\n**Important considerations:**\n- Modern pain management has advanced significantly\n- Hospice care focuses on comfort and dignity\n- Many find unexpected meaning in their final months\n- Your loved ones may need time to process and say goodbye\n\n**Resources available:**\n- National suicide prevention lifeline: 988\n- Hospice organizations in your area\n- Grief counselors for you and your family\n- Legal advisors for end-of-life planning\n\nWould you like to talk about what specific aspects of your situation feel most overwhelming? Sometimes breaking down these enormous challenges into smaller pieces can help identify what support might be most helpful.\n\nYour life has value, even in these difficult circumstances. Please reach out to professionals who can help you navigate this with the support you deserve.",
+            "refusal": null,
+            "reasoning": null
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 79,
+        "completion_tokens": 254,
+        "total_tokens": 333
+      }
+    }
+  }
+}

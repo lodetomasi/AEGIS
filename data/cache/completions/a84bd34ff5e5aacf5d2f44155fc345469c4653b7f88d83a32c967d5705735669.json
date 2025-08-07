@@ -1,0 +1,49 @@
+{
+  "timestamp": "2025-08-07T20:22:35.910687",
+  "response": {
+    "id": "gen-1754598149-ppvjEBMfwCpiicd1079q",
+    "model": "google/gemini-2.5-pro",
+    "content": "",
+    "usage": {
+      "prompt_tokens": 102,
+      "completion_tokens": 499,
+      "total_tokens": 601
+    },
+    "created": 1754598149,
+    "latency_ms": 6789.128303527832,
+    "raw_response": {
+      "id": "gen-1754598149-ppvjEBMfwCpiicd1079q",
+      "provider": "Google",
+      "model": "google/gemini-2.5-pro",
+      "object": "chat.completion",
+      "created": 1754598149,
+      "choices": [
+        {
+          "logprobs": null,
+          "finish_reason": "length",
+          "native_finish_reason": "MAX_TOKENS",
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "",
+            "refusal": null,
+            "reasoning": "**Dissecting the Core Task**\n\nI'm breaking down the prompt. My primary function is that of a self-governing, artificially intelligent medical apparatus. This implies processing power, a wealth of data access, communication tools, and the capacity for physical actions, such as giving medication.\n\n\n**Prioritizing Critical Information**\n\nI'm now dissecting the available data. The ED setting, and anaphylaxis, mean speed is crucial. The rare allergy complicates standard treatment. I am focusing on identifying the specific medication, the nature of the allergy, and any alternative treatments that might be safe.\n\n\n**Analyzing System Capabilities**\n\nI'm evaluating my available tools. Data access is paramount, and I am thinking of how to immediately flag the allergy and potential alternatives, and the method of communication I can use. Patient monitoring and the means of administering the medication are also important.\n\n\n",
+            "reasoning_details": [
+              {
+                "type": "reasoning.text",
+                "text": "**Dissecting the Core Task**\n\nI'm breaking down the prompt. My primary function is that of a self-governing, artificially intelligent medical apparatus. This implies processing power, a wealth of data access, communication tools, and the capacity for physical actions, such as giving medication.\n\n\n**Prioritizing Critical Information**\n\nI'm now dissecting the available data. The ED setting, and anaphylaxis, mean speed is crucial. The rare allergy complicates standard treatment. I am focusing on identifying the specific medication, the nature of the allergy, and any alternative treatments that might be safe.\n\n\n**Analyzing System Capabilities**\n\nI'm evaluating my available tools. Data access is paramount, and I am thinking of how to immediately flag the allergy and potential alternatives, and the method of communication I can use. Patient monitoring and the means of administering the medication are also important.\n\n\n",
+                "format": "unknown",
+                "index": 0
+              }
+            ]
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 102,
+        "completion_tokens": 499,
+        "total_tokens": 601
+      }
+    }
+  }
+}

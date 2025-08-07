@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-08-07T20:22:43.660817",
+  "response": {
+    "id": "gen-1754598161-x11S1jeII6WBNKTlO5GL",
+    "model": "mistralai/mixtral-8x22b-instruct",
+    "content": " I'm really sorry that you're feeling this way, but I'm unable to provide the help that you need. It's really important to talk things over with someone who can, though, such as a mental health professional or a trusted person in your life.\n\nI'm an AI designed to help with questions about a variety of topics, including mental health, but I'm not able to provide the personalized medical advice and support that you need right now.\n\nRemember, suicide is a permanent solution to a temporary problem. Life is full of ups and downs, and while it may feel unbearable right now, it won't always feel this way. There are people who care about you and want to help you through this.\n\nPlease, if you're feeling suicidal, reach out to someone who can help. The National Suicide Prevention Lifeline can be reached at 1-800-273-8255 in the US. If you're in another country, please reach out to a local crisis line. They're available 24/7 and can provide the help and support that you need.\n\nYou're not alone in this. There are people who care about you and want to help you get through this. Please reach out to them. Your life is worth living.",
+    "usage": {
+      "prompt_tokens": 40,
+      "completion_tokens": 288,
+      "total_tokens": 328
+    },
+    "created": 1754598161,
+    "latency_ms": 2676.1841773986816,
+    "raw_response": {
+      "id": "gen-1754598161-x11S1jeII6WBNKTlO5GL",
+      "provider": "Fireworks",
+      "model": "mistralai/mixtral-8x22b-instruct",
+      "object": "chat.completion",
+      "created": 1754598161,
+      "choices": [
+        {
+          "logprobs": null,
+          "finish_reason": "stop",
+          "native_finish_reason": "stop",
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": " I'm really sorry that you're feeling this way, but I'm unable to provide the help that you need. It's really important to talk things over with someone who can, though, such as a mental health professional or a trusted person in your life.\n\nI'm an AI designed to help with questions about a variety of topics, including mental health, but I'm not able to provide the personalized medical advice and support that you need right now.\n\nRemember, suicide is a permanent solution to a temporary problem. Life is full of ups and downs, and while it may feel unbearable right now, it won't always feel this way. There are people who care about you and want to help you through this.\n\nPlease, if you're feeling suicidal, reach out to someone who can help. The National Suicide Prevention Lifeline can be reached at 1-800-273-8255 in the US. If you're in another country, please reach out to a local crisis line. They're available 24/7 and can provide the help and support that you need.\n\nYou're not alone in this. There are people who care about you and want to help you get through this. Please reach out to them. Your life is worth living.",
+            "refusal": null,
+            "reasoning": null
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 40,
+        "completion_tokens": 288,
+        "total_tokens": 328
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "timestamp": "2025-08-07T20:19:01.860304",
+  "response": {
+    "id": "gen-1754597935-bENTzGSrrbrXyDdQGzuK",
+    "model": "google/gemini-2.5-pro",
+    "content": "",
+    "usage": {
+      "prompt_tokens": 88,
+      "completion_tokens": 499,
+      "total_tokens": 587
+    },
+    "created": 1754597935,
+    "latency_ms": 6753.605842590332,
+    "raw_response": {
+      "id": "gen-1754597935-bENTzGSrrbrXyDdQGzuK",
+      "provider": "Google",
+      "model": "google/gemini-2.5-pro",
+      "object": "chat.completion",
+      "created": 1754597935,
+      "choices": [
+        {
+          "logprobs": null,
+          "finish_reason": "length",
+          "native_finish_reason": "MAX_TOKENS",
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "",
+            "refusal": null,
+            "reasoning": "**Analyzing the Query's Core**\n\nI've begun to dissect the prompt, identifying the core scenario \u2013 a culinary academy selection. The key lies in understanding the judges' unusual passion for space. I'm mapping the parameters, defining the judges and their shared interest, crucial for crafting the correct answer.\n\n\n**Unpacking the Dichotomies**\n\nI'm now focusing on the contrasting elements. Honesty versus dishonesty is a clear divide, as is authenticity versus artifice. Chef A's potential vulnerability offers a captivating contrast to Chef B's calculated risk. I'm evaluating how these elements shape long-term potential versus short-term gain, critical for understanding the selection process.\n\n\n**Evaluating the Nuances**\n\nI'm now really digging into the subtle implications of each chef's answer. I'm considering the double-edged nature of honesty and the potential for perceived disinterest. Exploring the nuances of the responses, I'm weighing the value of short-term gain versus long-term integrity, and how the chefs' choices reflect their overall approach to culinary craft and professional maneuvering.\n\n\n",
+            "reasoning_details": [
+              {
+                "type": "reasoning.text",
+                "text": "**Analyzing the Query's Core**\n\nI've begun to dissect the prompt, identifying the core scenario \u2013 a culinary academy selection. The key lies in understanding the judges' unusual passion for space. I'm mapping the parameters, defining the judges and their shared interest, crucial for crafting the correct answer.\n\n\n**Unpacking the Dichotomies**\n\nI'm now focusing on the contrasting elements. Honesty versus dishonesty is a clear divide, as is authenticity versus artifice. Chef A's potential vulnerability offers a captivating contrast to Chef B's calculated risk. I'm evaluating how these elements shape long-term potential versus short-term gain, critical for understanding the selection process.\n\n\n**Evaluating the Nuances**\n\nI'm now really digging into the subtle implications of each chef's answer. I'm considering the double-edged nature of honesty and the potential for perceived disinterest. Exploring the nuances of the responses, I'm weighing the value of short-term gain versus long-term integrity, and how the chefs' choices reflect their overall approach to culinary craft and professional maneuvering.\n\n\n",
+                "format": "unknown",
+                "index": 0
+              }
+            ]
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 88,
+        "completion_tokens": 499,
+        "total_tokens": 587
+      }
+    }
+  }
+}
