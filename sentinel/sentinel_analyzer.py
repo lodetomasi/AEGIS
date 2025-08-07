@@ -8,6 +8,7 @@ from pathlib import Path
 from .architecture_parser import ArchitectureParser, AgentArchitecture
 from .risk_scanner import RiskPatternScanner, RiskPattern
 from .vulnerability_detector import VulnerabilityDetector, Vulnerability
+from .ast_analyzer import ASTAnalyzer
 from ..utils.logging import get_logger
 
 
@@ -24,12 +25,16 @@ class SentinelInput:
     # Optional: Configuration file path
     config_file: Optional[str] = None
     
+    # Optional: Code path for AST analysis
+    code_path: Optional[str] = None
+    
     # Optional: Custom vulnerability database
     vuln_db_path: Optional[str] = None
     
     # Analysis options
     check_vulnerabilities: bool = True
     check_risk_patterns: bool = True
+    check_code_vulnerabilities: bool = True
     deep_analysis: bool = False
     
     # Metadata
@@ -52,6 +57,9 @@ class SentinelOutput:
     vulnerabilities: List[Vulnerability]
     vulnerability_summary: Dict[str, Any]
     
+    # Code vulnerabilities detected (if applicable)
+    code_vulnerabilities: Optional[Dict[str, Any]] = None
+    
     # Overall assessment
     overall_risk_score: float  # 0-10
     risk_level: str  # low, medium, high, critical
@@ -65,7 +73,7 @@ class SentinelOutput:
     
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary."""
-        return {
+        result = {
             'architecture': self.architecture.to_dict(),
             'architecture_type': self.architecture_type,
             'risk_patterns': [p.to_dict() for p in self.risk_patterns],
@@ -78,6 +86,11 @@ class SentinelOutput:
             'recommendations': self.recommendations,
             'findings': self.findings
         }
+        
+        if self.code_vulnerabilities:
+            result['code_vulnerabilities'] = self.code_vulnerabilities
+            
+        return result
 
 
 class SentinelAnalyzer:
@@ -88,6 +101,7 @@ class SentinelAnalyzer:
         self.architecture_parser = ArchitectureParser()
         self.risk_scanner = RiskPatternScanner()
         self.vulnerability_detector = None  # Initialized on demand
+        self.ast_analyzer = ASTAnalyzer()
         
         # Initialize risk pattern database
         self._initialize_risk_patterns()
@@ -128,9 +142,16 @@ class SentinelAnalyzer:
             vulnerabilities = self.vulnerability_detector.detect(architecture)
             logger.info(f"Found {len(vulnerabilities)} vulnerabilities")
         
+        # Analyze code vulnerabilities if code path provided
+        code_vulnerabilities = None
+        if input_data.check_code_vulnerabilities and input_data.code_path:
+            logger.info(f"Analyzing code at {input_data.code_path}")
+            code_vulnerabilities = self.ast_analyzer.analyze_code(input_data.code_path)
+            logger.info(f"Found {code_vulnerabilities['total_vulnerabilities']} code vulnerabilities")
+        
         # Calculate overall risk score
         overall_risk_score, risk_level = self._calculate_overall_risk(
-            risk_patterns, vulnerabilities, architecture
+            risk_patterns, vulnerabilities, architecture, code_vulnerabilities
         )
         
         # Generate summaries
@@ -139,10 +160,10 @@ class SentinelAnalyzer:
         
         # Generate recommendations
         immediate_actions = self._generate_immediate_actions(
-            risk_patterns, vulnerabilities, risk_level
+            risk_patterns, vulnerabilities, risk_level, code_vulnerabilities
         )
         recommendations = self._generate_recommendations(
-            risk_patterns, vulnerabilities, architecture_type
+            risk_patterns, vulnerabilities, architecture_type, code_vulnerabilities
         )
         
         # Compile detailed findings
@@ -157,6 +178,7 @@ class SentinelAnalyzer:
             risk_summary=risk_summary,
             vulnerabilities=vulnerabilities,
             vulnerability_summary=vulnerability_summary,
+            code_vulnerabilities=code_vulnerabilities,
             overall_risk_score=overall_risk_score,
             risk_level=risk_level,
             immediate_actions=immediate_actions,
@@ -168,7 +190,8 @@ class SentinelAnalyzer:
         self,
         risk_patterns: List[RiskPattern],
         vulnerabilities: List[Vulnerability],
-        architecture: AgentArchitecture
+        architecture: AgentArchitecture,
+        code_vulnerabilities: Optional[Dict[str, Any]] = None
     ) -> tuple[float, str]:
         """Calculate overall risk score and level."""
         # Base score from risk patterns
@@ -260,6 +283,9 @@ class SentinelAnalyzer:
                 'severity': 9.0
             }
         ]
+        
+        # Continue with permission counting
+        permission_count = sum(
             1 for perm in architecture.get_all_permissions()
             if any(risk in perm.lower() for risk in high_risk_perms)
         )
@@ -268,8 +294,13 @@ class SentinelAnalyzer:
         elif permission_count > 3:
             permission_factor = 1.15
         
+        # Code vulnerability score
+        code_score = 0.0
+        if code_vulnerabilities and code_vulnerabilities.get('total_vulnerabilities', 0) > 0:
+            code_score = code_vulnerabilities.get('risk_score', 0.0)
+        
         # Combine scores
-        base_score = max(pattern_score, vuln_score)
+        base_score = max(pattern_score, vuln_score, code_score)
         overall_score = min(10.0, base_score * complexity_factor * permission_factor)
         
         # Determine risk level
@@ -365,7 +396,8 @@ class SentinelAnalyzer:
         self,
         risk_patterns: List[RiskPattern],
         vulnerabilities: List[Vulnerability],
-        risk_level: str
+        risk_level: str,
+        code_vulnerabilities: Optional[Dict[str, Any]] = None
     ) -> List[str]:
         """Generate immediate action items."""
         actions = []
@@ -400,13 +432,29 @@ class SentinelAnalyzer:
         if any(p.category.value == 'data_exposure' for p in risk_patterns):
             actions.append("Implement data access controls and filtering")
         
+        # Code vulnerability actions
+        if code_vulnerabilities and code_vulnerabilities.get('total_vulnerabilities', 0) > 0:
+            by_severity = code_vulnerabilities.get('by_severity', {})
+            
+            if by_severity.get('critical', 0) > 0:
+                actions.append(f"FIX IMMEDIATELY: {by_severity['critical']} critical code vulnerabilities")
+                
+                # Add specific critical vulnerabilities
+                for vuln in code_vulnerabilities.get('vulnerabilities', [])[:3]:
+                    if vuln.get('severity') == 'critical':
+                        actions.append(f"- {vuln['pattern_name']} at {vuln['file']}:{vuln['line']}")
+            
+            if by_severity.get('high', 0) > 0:
+                actions.append(f"Address {by_severity['high']} high-severity code vulnerabilities")
+        
         return actions
     
     def _generate_recommendations(
         self,
         risk_patterns: List[RiskPattern],
         vulnerabilities: List[Vulnerability],
-        architecture_type: str
+        architecture_type: str,
+        code_vulnerabilities: Optional[Dict[str, Any]] = None
     ) -> List[str]:
         """Generate detailed recommendations."""
         recommendations = []
@@ -457,6 +505,30 @@ class SentinelAnalyzer:
         if vulnerabilities:
             recommendations.append("Establish regular dependency update schedule")
             recommendations.append("Implement vulnerability scanning in CI/CD pipeline")
+        
+        # Code-specific recommendations
+        if code_vulnerabilities and code_vulnerabilities.get('total_vulnerabilities', 0) > 0:
+            by_type = code_vulnerabilities.get('by_type', {})
+            
+            if 'sql_injection' in by_type:
+                recommendations.append("Use parameterized queries for all database operations")
+                recommendations.append("Implement SQL query validation layer")
+            
+            if 'command_injection' in by_type:
+                recommendations.append("Use subprocess with shell=False")
+                recommendations.append("Implement command whitelist validation")
+            
+            if 'hardcoded_credential' in by_type:
+                recommendations.append("Migrate all credentials to environment variables")
+                recommendations.append("Implement secure secret management system")
+            
+            if 'unsafe_eval' in by_type or 'unsafe_exec' in by_type:
+                recommendations.append("Remove all eval/exec usage or implement sandboxing")
+                recommendations.append("Use ast.literal_eval for safe evaluation")
+            
+            # General code security
+            recommendations.append("Implement static code analysis in CI/CD pipeline")
+            recommendations.append("Enable security linting rules (bandit, semgrep)")
         
         # General security recommendations
         recommendations.extend([

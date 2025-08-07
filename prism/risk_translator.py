@@ -8,6 +8,7 @@ from pathlib import Path
 from .risk_mapper import RiskMapper, ErrorType
 from .context_weigher import ContextWeigher, Industry, Sensitivity
 from .risk_calculator import RiskCalculator, RiskAssessment
+from .industry_risk_models import IndustryRiskModelFactory
 from ..utils.logging import get_logger
 
 
@@ -88,6 +89,7 @@ class RiskTranslator:
         self.risk_mapper = RiskMapper(risk_mappings_file)
         self.context_weigher = ContextWeigher(context_config_file)
         self.risk_calculator = RiskCalculator()
+        self.industry_calculators = {}
     
     def translate(self, input_data: RiskTranslationInput) -> RiskTranslationOutput:
         """
@@ -244,11 +246,18 @@ class RiskTranslator:
         error_analysis: Dict[ErrorType, List[str]],
         industry: Industry
     ) -> Dict[str, Any]:
-        """Generate business impact analysis."""
+        """Generate business impact analysis with industry-specific calculations."""
+        # Get or create industry calculator
+        if industry not in self.industry_calculators:
+            self.industry_calculators[industry] = IndustryRiskModelFactory.create_calculator(industry)
+        
+        industry_calc = self.industry_calculators[industry]
+        
         impacts = {
             'financial': {
                 'potential_loss': self._estimate_financial_impact(risk_assessment),
-                'risk_factors': []
+                'risk_factors': [],
+                'industry_specific': {}
             },
             'reputation': {
                 'impact_level': self._assess_reputation_impact(risk_assessment),
@@ -263,6 +272,53 @@ class RiskTranslator:
                 'risk_factors': []
             }
         }
+        
+        # Add industry-specific financial calculations
+        total_industry_impact = 0
+        for error_type, errors in error_analysis.items():
+            error_rate = risk_assessment.risk_by_error_type.get(error_type.value, 0.0) / 10.0  # Convert from risk score to rate
+            
+            # Use appropriate calculator method based on industry
+            if hasattr(industry_calc, 'calculate_financial_impact'):
+                industry_impact = industry_calc.calculate_financial_impact(
+                    error_type.value,
+                    error_rate
+                )
+                impacts['financial']['industry_specific'][error_type.value] = industry_impact
+                total_industry_impact += industry_impact.get('total_financial_impact', 0)
+            
+            # Healthcare-specific calculations
+            if industry == Industry.HEALTHCARE and hasattr(industry_calc, 'calculate_regulatory_risk_score'):
+                regulatory_score = industry_calc.calculate_regulatory_risk_score(
+                    {error_type.value: error_rate}
+                )
+                impacts['compliance']['healthcare_regulatory_score'] = regulatory_score
+            
+            # Finance-specific calculations
+            elif industry == Industry.FINANCE and hasattr(industry_calc, 'calculate_basel_risk_score'):
+                basel_scores = industry_calc.calculate_basel_risk_score(
+                    {error_type.value: error_rate}
+                )
+                impacts['compliance']['basel_risk_scores'] = basel_scores
+            
+            # Legal-specific calculations
+            elif industry == Industry.LEGAL:
+                if hasattr(industry_calc, 'calculate_malpractice_exposure'):
+                    malpractice = industry_calc.calculate_malpractice_exposure(
+                        error_type.value,
+                        error_rate
+                    )
+                    impacts['financial']['malpractice_exposure'] = malpractice
+                
+                if hasattr(industry_calc, 'calculate_ethical_risk_score'):
+                    ethical_score = industry_calc.calculate_ethical_risk_score(
+                        {error_type.value: error_rate}
+                    )
+                    impacts['compliance']['ethical_risk_score'] = ethical_score
+        
+        # Update total financial impact with industry-specific calculations
+        if total_industry_impact > 0:
+            impacts['financial']['industry_adjusted_loss'] = f"${total_industry_impact:,.0f}"
         
         # Add specific risk factors
         for error_type in error_analysis:
@@ -372,7 +428,7 @@ class RiskTranslator:
         business_impacts: Dict[str, Any],
         industry: Industry
     ) -> str:
-        """Generate executive summary."""
+        """Generate executive summary with industry-specific insights."""
         risk_level = risk_assessment.get_risk_level()
         
         summary = f"AI Agent Risk Assessment Summary\n\n"
@@ -383,12 +439,34 @@ class RiskTranslator:
         summary += f"• Probability of Error: {risk_assessment.probability:.1%}\n"
         summary += f"• Impact Severity: {risk_assessment.impact:.1f}/10\n"
         summary += f"• Financial Risk: {business_impacts['financial']['potential_loss']}\n"
+        
+        # Add industry-specific financial impact if available
+        if 'industry_adjusted_loss' in business_impacts['financial']:
+            summary += f"• Industry-Specific Impact: {business_impacts['financial']['industry_adjusted_loss']}\n"
+        
         summary += f"• Reputation Risk: {business_impacts['reputation']['impact_level']}\n"
+        
+        # Add industry-specific compliance insights
+        if industry == Industry.HEALTHCARE and 'healthcare_regulatory_score' in business_impacts['compliance']:
+            summary += f"• Healthcare Regulatory Risk Score: {business_impacts['compliance']['healthcare_regulatory_score']:.1f}/10\n"
+        elif industry == Industry.FINANCE and 'basel_risk_scores' in business_impacts['compliance']:
+            basel = business_impacts['compliance']['basel_risk_scores']
+            summary += f"• Basel III Capital Impact: {basel.get('operational_risk_capital', 0):.1%}\n"
+        elif industry == Industry.LEGAL and 'ethical_risk_score' in business_impacts['compliance']:
+            summary += f"• Legal Ethics Risk Score: {business_impacts['compliance']['ethical_risk_score']:.1f}/10\n"
         
         if risk_assessment.top_risk_factors:
             summary += "\nTop Risk Factors:\n"
             for i, factor in enumerate(risk_assessment.top_risk_factors[:3], 1):
                 summary += f"{i}. {factor['error_type']} (Risk: {factor['risk_score']:.1f})\n"
+        
+        # Add industry-specific warnings
+        if industry == Industry.HEALTHCARE and risk_level in ["CRITICAL", "HIGH"]:
+            summary += "\n⚠️ WARNING: Patient safety and HIPAA compliance at risk\n"
+        elif industry == Industry.FINANCE and risk_level in ["CRITICAL", "HIGH"]:
+            summary += "\n⚠️ WARNING: Regulatory violations may trigger SEC/FINRA investigations\n"
+        elif industry == Industry.LEGAL and risk_level in ["CRITICAL", "HIGH"]:
+            summary += "\n⚠️ WARNING: Malpractice exposure exceeds professional liability coverage\n"
         
         return summary
     

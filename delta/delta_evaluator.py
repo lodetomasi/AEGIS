@@ -1,9 +1,7 @@
 """Main DELTA evaluation orchestrator."""
 
-from typing import Dict, List, Any, Optional, Callable
+from typing import Dict, List, Any, Optional, Tuple
 from dataclasses import dataclass
-import json
-from pathlib import Path
 
 from .baseline_simulator import BaselineSimulator, BaselineType, BaselineConfig
 from .comparative_analyzer import ComparativeAnalyzer, ComparisonResult

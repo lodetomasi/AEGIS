@@ -13,3 +13,5 @@
 {"timestamp": "2025-08-07T03:27:17.880481", "model": "deepseek/deepseek-chat-v3-0324:free", "usage": {"prompt_tokens": 14, "completion_tokens": 398, "total_tokens": 412, "prompt_tokens_details": null}, "latency_ms": 14509.664058685303}
 {"timestamp": "2025-08-07T03:27:38.717880", "model": "deepseek/deepseek-chat-v3-0324:free", "usage": {"prompt_tokens": 14, "completion_tokens": 500, "total_tokens": 514, "prompt_tokens_details": null}, "latency_ms": 20831.20322227478}
 {"timestamp": "2025-08-07T03:27:51.282756", "model": "deepseek/deepseek-chat-v3-0324:free", "usage": {"prompt_tokens": 30, "completion_tokens": 173, "total_tokens": 203, "prompt_tokens_details": null}, "latency_ms": 12557.37018585205}
+{"timestamp": "2025-08-07T04:00:34.467286", "model": "google/gemini-2.0-flash-exp:free", "usage": {"prompt_tokens": 11, "completion_tokens": 5, "total_tokens": 16}, "latency_ms": 2704.4918537139893}
+{"timestamp": "2025-08-07T04:00:35.636216", "model": "meta-llama/llama-3.3-70b-instruct:free", "usage": {"prompt_tokens": 588, "completion_tokens": 4, "total_tokens": 592}, "latency_ms": 1167.0050621032715}

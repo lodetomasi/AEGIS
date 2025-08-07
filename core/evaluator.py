@@ -6,8 +6,6 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 import json
-import asyncio
-import concurrent.futures
 
 from ..core.config import AgentConfig, EvaluationConfig, EvaluationResult
 from ..core.report import Report, ReportGenerator
@@ -18,7 +16,6 @@ from ..delta import DeltaEvaluator, DeltaInput
 from ..prism import RiskTranslator, RiskTranslationInput
 
 from ..utils.logging import get_logger
-from ..utils.metrics import get_global_metrics
 from ..utils.config_manager import ConfigManager
 from ..utils.llm_client import LLMClient
 

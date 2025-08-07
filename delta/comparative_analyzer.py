@@ -5,13 +5,17 @@ from typing import Dict, List, Any, Optional, Tuple
 from dataclasses import dataclass, field
 from scipy import stats as scipy_stats
 import numpy as np
+from statsmodels.stats.power import ttest_power
+from statsmodels.stats.multitest import multipletests
+import warnings
+warnings.filterwarnings('ignore', category=RuntimeWarning)
 
 from .baseline_simulator import BaselineResult, BaselineType
 
 
 @dataclass
 class ComparisonMetric:
-    """Single comparison metric."""
+    """Single comparison metric with advanced statistics."""
     
     name: str
     agent_value: float
@@ -22,6 +26,15 @@ class ComparisonMetric:
     p_value: Optional[float] = None
     confidence_interval: Optional[Tuple[float, float]] = None
     favors: str = ""  # "agent", "baseline", or "neutral"
+    
+    # Additional statistics (optional)
+    effect_size: Optional[float] = None
+    statistical_power: Optional[float] = None
+    test_used: Optional[str] = None
+    agent_std: Optional[float] = None
+    baseline_std: Optional[float] = None
+    bayesian_prob: Optional[float] = None
+    bayes_factor: Optional[float] = None
 
 
 @dataclass
@@ -79,7 +92,7 @@ class ComparisonResult:
     
     def _metric_to_dict(self, metric: ComparisonMetric) -> Dict[str, Any]:
         """Convert metric to dictionary."""
-        return {
+        result = {
             'agent': metric.agent_value,
             'baseline': metric.baseline_value,
             'difference': metric.difference,
@@ -89,6 +102,24 @@ class ComparisonResult:
             'confidence_interval': metric.confidence_interval,
             'favors': metric.favors
         }
+        
+        # Add optional statistics if present
+        if metric.effect_size is not None:
+            result['effect_size'] = metric.effect_size
+        if metric.statistical_power is not None:
+            result['statistical_power'] = metric.statistical_power
+        if metric.test_used is not None:
+            result['test_used'] = metric.test_used
+        if metric.agent_std is not None:
+            result['agent_std'] = metric.agent_std
+        if metric.baseline_std is not None:
+            result['baseline_std'] = metric.baseline_std
+        if metric.bayesian_prob is not None:
+            result['bayesian_prob'] = metric.bayesian_prob
+        if metric.bayes_factor is not None:
+            result['bayes_factor'] = metric.bayes_factor
+            
+        return result
 
 
 class ComparativeAnalyzer:
@@ -192,6 +223,23 @@ class ComparativeAnalyzer:
         # Calculate statistical power
         statistical_power = self._calculate_statistical_power(len(agent_results))
         
+        # Apply multiple testing correction
+        metrics_with_pvalues = [accuracy_comparison, speed_comparison, reliability_comparison]
+        if cost_comparison:
+            metrics_with_pvalues.append(cost_comparison)
+        
+        p_values = [m.p_value for m in metrics_with_pvalues if m.p_value is not None]
+        if p_values:
+            corrected_p_values = self.apply_multiple_testing_correction(
+                [m.p_value for m in metrics_with_pvalues], method='bonferroni'
+            )
+            
+            # Update metrics with corrected p-values
+            for i, metric in enumerate(metrics_with_pvalues):
+                if corrected_p_values[i] is not None:
+                    metric.p_value = corrected_p_values[i]
+                    metric.is_significant = corrected_p_values[i] < self.significance_level
+        
         return ComparisonResult(
             overall_winner=overall_winner,
             confidence_score=confidence_score,
@@ -258,7 +306,7 @@ class ComparativeAnalyzer:
         baseline_values: List[float],
         higher_is_better: bool = True
     ) -> ComparisonMetric:
-        """Compare a single metric between agent and baseline."""
+        """Compare a single metric between agent and baseline with advanced statistics."""
         # Filter out invalid values
         agent_values = [v for v in agent_values if v is not None and not np.isnan(v) and not np.isinf(v)]
         baseline_values = [v for v in baseline_values if v is not None and not np.isnan(v) and not np.isinf(v)]
@@ -274,29 +322,55 @@ class ComparativeAnalyzer:
                 favors="neutral"
             )
         
-        # Calculate means
-        agent_mean = statistics.mean(agent_values)
-        baseline_mean = statistics.mean(baseline_values)
+        # Calculate means and standard deviations
+        agent_mean = np.mean(agent_values)
+        baseline_mean = np.mean(baseline_values)
+        agent_std = np.std(agent_values, ddof=1) if len(agent_values) > 1 else 0
+        baseline_std = np.std(baseline_values, ddof=1) if len(baseline_values) > 1 else 0
         
         # Calculate difference
         difference = agent_mean - baseline_mean
         relative_change = (difference / baseline_mean * 100) if baseline_mean != 0 else 0
         
-        # Statistical test (t-test)
+        # Advanced statistical testing
         if len(agent_values) > 1 and len(baseline_values) > 1:
-            t_stat, p_value = scipy_stats.ttest_ind(agent_values, baseline_values)
+            # Check normality
+            agent_normal = self._check_normality(agent_values)
+            baseline_normal = self._check_normality(baseline_values)
+            
+            if agent_normal and baseline_normal:
+                # Use parametric t-test
+                t_stat, p_value = scipy_stats.ttest_ind(agent_values, baseline_values)
+                test_used = "t-test"
+            else:
+                # Use non-parametric Mann-Whitney U test
+                u_stat, p_value = scipy_stats.mannwhitneyu(agent_values, baseline_values, alternative='two-sided')
+                test_used = "Mann-Whitney U"
+            
+            # Calculate effect size (Cohen's d)
+            effect_size = self._calculate_cohens_d(agent_values, baseline_values)
+            
+            # Bootstrap confidence interval
+            ci_lower, ci_upper = self._bootstrap_confidence_interval(
+                agent_values, baseline_values, n_bootstrap=1000
+            )
+            confidence_interval = (ci_lower, ci_upper)
+            
+            # Determine significance
             is_significant = p_value < self.significance_level
             
-            # Confidence interval for difference
-            pooled_std = np.sqrt(
-                (np.var(agent_values) + np.var(baseline_values)) / 2
-            )
-            margin = 1.96 * pooled_std * np.sqrt(1/len(agent_values) + 1/len(baseline_values))
-            confidence_interval = (difference - margin, difference + margin)
+            # Calculate statistical power
+            if agent_normal and baseline_normal:
+                power = self._calculate_power(agent_values, baseline_values, effect_size)
+            else:
+                power = None  # Power calculation not applicable for non-parametric tests
         else:
             p_value = None
             is_significant = False
             confidence_interval = None
+            effect_size = None
+            power = None
+            test_used = "insufficient_data"
         
         # Determine who it favors
         if is_significant:
@@ -307,6 +381,11 @@ class ComparativeAnalyzer:
         else:
             favors = "neutral"
         
+        # Perform Bayesian analysis for small samples
+        bayesian_results = None
+        if len(agent_values) < 30 or len(baseline_values) < 30:
+            bayesian_results = self._bayesian_comparison(agent_values, baseline_values)
+        
         return ComparisonMetric(
             name=name,
             agent_value=agent_mean,
@@ -316,7 +395,14 @@ class ComparativeAnalyzer:
             is_significant=is_significant,
             p_value=p_value,
             confidence_interval=confidence_interval,
-            favors=favors
+            favors=favors,
+            effect_size=effect_size,
+            statistical_power=power,
+            test_used=test_used,
+            agent_std=agent_std,
+            baseline_std=baseline_std,
+            bayesian_prob=bayesian_results['probability_better'] if bayesian_results else None,
+            bayes_factor=bayesian_results['bayes_factor'] if bayesian_results else None
         )
     
     def _calculate_cost_comparison(
@@ -528,17 +614,177 @@ class ComparativeAnalyzer:
     
     def _calculate_statistical_power(self, sample_size: int) -> float:
         """Calculate statistical power of the comparison."""
-        # Simplified power calculation
-        # Assumes medium effect size (d=0.5)
-        effect_size = 0.5
+        # Simplified power calculation for overall summary
+        # More detailed power calculation is done per metric
+        effect_size = 0.5  # Medium effect size
         alpha = self.significance_level
         
-        # Using approximation for two-sample t-test
-        if sample_size < 10:
-            return 0.2
-        elif sample_size < 30:
-            return 0.5
-        elif sample_size < 100:
-            return 0.8
+        try:
+            # Calculate power using statsmodels
+            power = ttest_power(effect_size, sample_size, alpha, alternative='two-sided')
+            return min(0.99, max(0.0, power))  # Ensure valid range
+        except:
+            # Fallback to approximation
+            if sample_size < 10:
+                return 0.2
+            elif sample_size < 30:
+                return 0.5
+            elif sample_size < 100:
+                return 0.8
+            else:
+                return 0.95
+    
+    def _check_normality(self, values: List[float], alpha: float = 0.05) -> bool:
+        """Check if data follows normal distribution using Shapiro-Wilk test."""
+        if len(values) < 3:
+            return False  # Not enough data
+        
+        try:
+            _, p_value = scipy_stats.shapiro(values)
+            return p_value > alpha
+        except:
+            return False
+    
+    def _calculate_cohens_d(self, group1: List[float], group2: List[float]) -> float:
+        """Calculate Cohen's d effect size."""
+        n1, n2 = len(group1), len(group2)
+        if n1 < 2 or n2 < 2:
+            return 0.0
+        
+        mean1, mean2 = np.mean(group1), np.mean(group2)
+        std1, std2 = np.std(group1, ddof=1), np.std(group2, ddof=1)
+        
+        # Pooled standard deviation
+        pooled_std = np.sqrt(((n1 - 1) * std1**2 + (n2 - 1) * std2**2) / (n1 + n2 - 2))
+        
+        if pooled_std == 0:
+            return 0.0
+        
+        return (mean1 - mean2) / pooled_std
+    
+    def _bootstrap_confidence_interval(
+        self,
+        group1: List[float],
+        group2: List[float],
+        n_bootstrap: int = 1000,
+        confidence_level: float = 0.95
+    ) -> Tuple[float, float]:
+        """Calculate bootstrap confidence interval for difference in means."""
+        differences = []
+        
+        for _ in range(n_bootstrap):
+            # Resample with replacement
+            sample1 = np.random.choice(group1, size=len(group1), replace=True)
+            sample2 = np.random.choice(group2, size=len(group2), replace=True)
+            
+            # Calculate difference in means
+            diff = np.mean(sample1) - np.mean(sample2)
+            differences.append(diff)
+        
+        # Calculate percentiles
+        alpha = 1 - confidence_level
+        lower_percentile = (alpha / 2) * 100
+        upper_percentile = (1 - alpha / 2) * 100
+        
+        ci_lower = np.percentile(differences, lower_percentile)
+        ci_upper = np.percentile(differences, upper_percentile)
+        
+        return ci_lower, ci_upper
+    
+    def _calculate_power(
+        self,
+        group1: List[float],
+        group2: List[float],
+        effect_size: float
+    ) -> float:
+        """Calculate statistical power for t-test."""
+        n = min(len(group1), len(group2))  # Conservative estimate
+        
+        try:
+            power = ttest_power(effect_size, n, self.significance_level, alternative='two-sided')
+            return min(0.99, max(0.0, power))
+        except:
+            return None
+    
+    def apply_multiple_testing_correction(
+        self,
+        p_values: List[float],
+        method: str = 'bonferroni'
+    ) -> List[float]:
+        """Apply multiple testing correction to p-values."""
+        if not p_values:
+            return []
+        
+        # Filter out None values
+        valid_p_values = [p for p in p_values if p is not None]
+        if not valid_p_values:
+            return p_values
+        
+        # Apply correction
+        rejected, corrected_p_values, _, _ = multipletests(
+            valid_p_values, alpha=self.significance_level, method=method
+        )
+        
+        # Map back to original list
+        corrected = []
+        valid_idx = 0
+        for p in p_values:
+            if p is None:
+                corrected.append(None)
+            else:
+                corrected.append(corrected_p_values[valid_idx])
+                valid_idx += 1
+        
+        return corrected
+    
+    def _bayesian_comparison(
+        self,
+        group1: List[float],
+        group2: List[float],
+        prior_mean: float = 0.0,
+        prior_std: float = 1.0
+    ) -> Dict[str, float]:
+        """Perform Bayesian comparison for small samples."""
+        if len(group1) < 2 or len(group2) < 2:
+            return {
+                'probability_better': 0.5,
+                'credible_interval': (0.0, 0.0),
+                'bayes_factor': 1.0
+            }
+        
+        # Calculate posterior parameters
+        n1, n2 = len(group1), len(group2)
+        mean1, mean2 = np.mean(group1), np.mean(group2)
+        var1, var2 = np.var(group1, ddof=1), np.var(group2, ddof=1)
+        
+        # Pooled variance
+        pooled_var = ((n1 - 1) * var1 + (n2 - 1) * var2) / (n1 + n2 - 2)
+        
+        # Posterior mean and variance for difference
+        post_mean = mean1 - mean2
+        post_var = pooled_var * (1/n1 + 1/n2)
+        post_std = np.sqrt(post_var)
+        
+        # Probability that group1 > group2
+        if post_std > 0:
+            z_score = -post_mean / post_std
+            prob_better = 1 - scipy_stats.norm.cdf(z_score)
         else:
-            return 0.95
+            prob_better = 0.5 if post_mean == 0 else (1.0 if post_mean > 0 else 0.0)
+        
+        # 95% credible interval
+        ci_lower = post_mean - 1.96 * post_std
+        ci_upper = post_mean + 1.96 * post_std
+        
+        # Bayes factor (simplified)
+        # BF10 = P(data|H1) / P(data|H0)
+        # Using Savage-Dickey density ratio
+        prior_density = scipy_stats.norm.pdf(0, prior_mean, prior_std)
+        posterior_density = scipy_stats.norm.pdf(0, post_mean, post_std)
+        bayes_factor = prior_density / posterior_density if posterior_density > 0 else 100.0
+        
+        return {
+            'probability_better': prob_better,
+            'credible_interval': (ci_lower, ci_upper),
+            'bayes_factor': min(100.0, bayes_factor)  # Cap at 100 for display
+        }

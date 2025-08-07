@@ -3,8 +3,7 @@
 import statistics
 from typing import List, Dict, Any, Optional, Tuple
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
-import numpy as np
+from datetime import datetime
 
 
 @dataclass

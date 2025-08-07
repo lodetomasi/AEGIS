@@ -5,6 +5,8 @@ requests>=2.31.0
 pyyaml>=6.0
 pandas>=2.0.0
 numpy>=1.24.0
+scipy>=1.10.0
+statsmodels>=0.13.0
 
 # Retry logic
 backoff>=2.2.1

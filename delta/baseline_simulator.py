@@ -1,12 +1,10 @@
 """Baseline performance simulation for comparison."""
 
 import random
-import time
-from typing import Dict, List, Any, Optional, Callable
+from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, field
 from enum import Enum
 import numpy as np
-from scipy import stats
 
 
 class BaselineType(Enum):
