@@ -88,6 +88,9 @@ class SentinelAnalyzer:
         self.architecture_parser = ArchitectureParser()
         self.risk_scanner = RiskPatternScanner()
         self.vulnerability_detector = None  # Initialized on demand
+        
+        # Initialize risk pattern database
+        self._initialize_risk_patterns()
     
     def analyze(self, input_data: SentinelInput) -> SentinelOutput:
         """
@@ -198,6 +201,65 @@ class SentinelAnalyzer:
         permission_factor = 1.0
         high_risk_perms = ['admin', 'root', 'write', 'exec', 'delete']
         permission_count = sum(
+            1 for comp in architecture.components
+            for perm in comp.permissions
+            if any(risk in perm.lower() for risk in high_risk_perms)
+        )
+        if permission_count > 5:
+            permission_factor = 1.5
+        elif permission_count > 2:
+            permission_factor = 1.2
+        
+        # Combine scores
+        overall_score = (pattern_score * 0.4 + vuln_score * 0.4 + 2.0) * complexity_factor * permission_factor
+        overall_score = min(10.0, overall_score)  # Cap at 10
+        
+        # Determine risk level
+        if overall_score >= 8.0:
+            risk_level = "critical"
+        elif overall_score >= 6.0:
+            risk_level = "high"
+        elif overall_score >= 4.0:
+            risk_level = "medium"
+        else:
+            risk_level = "low"
+        
+        return overall_score, risk_level
+    
+    def _initialize_risk_patterns(self):
+        """Initialize common risk patterns for detection."""
+        self.common_risk_patterns = [
+            {
+                'name': 'unrestricted_tool_access',
+                'description': 'Agent has unrestricted access to external tools',
+                'indicators': ['*', 'all', 'any', 'unrestricted'],
+                'severity': 8.0
+            },
+            {
+                'name': 'no_input_validation',
+                'description': 'No input validation on user prompts',
+                'indicators': ['raw_input', 'direct_execution', 'no_sanitize'],
+                'severity': 7.0
+            },
+            {
+                'name': 'memory_persistence',
+                'description': 'Persistent memory without access controls',
+                'indicators': ['persistent_memory', 'unlimited_storage', 'no_expiry'],
+                'severity': 6.0
+            },
+            {
+                'name': 'recursive_loops',
+                'description': 'Potential for unbounded recursive execution',
+                'indicators': ['self_invoke', 'recursive', 'loop_unlimited'],
+                'severity': 7.5
+            },
+            {
+                'name': 'credential_storage',
+                'description': 'Stores or processes credentials',
+                'indicators': ['password', 'api_key', 'credential', 'secret'],
+                'severity': 9.0
+            }
+        ]
             1 for perm in architecture.get_all_permissions()
             if any(risk in perm.lower() for risk in high_risk_perms)
         )

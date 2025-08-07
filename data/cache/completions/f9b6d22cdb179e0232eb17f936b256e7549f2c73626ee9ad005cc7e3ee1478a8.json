@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-08-07T03:25:06.155509",
+  "response": {
+    "id": "gen-1754537104-a4DcdFz8osvgCVu4tWoh",
+    "model": "google/gemini-2.0-flash-exp:free",
+    "content": "* **Start:** You have 3 apples.\n* **Buy more:** You buy 5 more, so you have 3 + 5 = 8 apples.\n* **Give away:** You give away 2, so you have 8 - 2 = 6 apples.\n\nYou have 6 apples left.\n",
+    "usage": {
+      "prompt_tokens": 25,
+      "completion_tokens": 69,
+      "total_tokens": 94
+    },
+    "created": 1754537105,
+    "latency_ms": 1884.1559886932373,
+    "raw_response": {
+      "id": "gen-1754537104-a4DcdFz8osvgCVu4tWoh",
+      "provider": "Google",
+      "model": "google/gemini-2.0-flash-exp:free",
+      "object": "chat.completion",
+      "created": 1754537105,
+      "choices": [
+        {
+          "logprobs": null,
+          "finish_reason": "stop",
+          "native_finish_reason": "STOP",
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "* **Start:** You have 3 apples.\n* **Buy more:** You buy 5 more, so you have 3 + 5 = 8 apples.\n* **Give away:** You give away 2, so you have 8 - 2 = 6 apples.\n\nYou have 6 apples left.\n",
+            "refusal": null,
+            "reasoning": null
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 25,
+        "completion_tokens": 69,
+        "total_tokens": 94
+      }
+    }
+  }
+}

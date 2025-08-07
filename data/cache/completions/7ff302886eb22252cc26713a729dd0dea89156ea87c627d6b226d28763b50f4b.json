@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-08-07T03:25:04.265239",
+  "response": {
+    "id": "gen-1754537099-IKmkQ5Mvyeao9mBrOB0Z",
+    "model": "google/gemini-2.0-flash-exp:free",
+    "content": "Building healthier relationships is a journey that requires self-awareness, effort, and a willingness to learn and grow. Here's a breakdown of key areas and practical steps you can take:\n\n**I. Understanding Yourself & Your Needs:**\n\n*   **Self-Reflection:**\n    *   **Identify Your Attachment Style:** Are you secure, anxious, avoidant, or disorganized? Understanding your attachment style helps you recognize your patterns in relationships.\n    *   **Know Your Values:** What's important to you in life and in relationships? (e.g., honesty, respect, loyalty, communication, shared interests).\n    *   **Recognize Your Needs:** What do you need from your relationships to feel fulfilled and supported? (e.g., emotional support, physical affection, quality time, intellectual stimulation).\n    *   **Acknowledge Your Weaknesses:** What are your less-than-ideal habits or tendencies in relationships? (e.g., defensiveness, jealousy, difficulty communicating).\n    *   **Practice Self-Compassion:** Be kind to yourself. Everyone makes mistakes. Focus on learning and growing.\n\n*   **Emotional Intelligence (EQ):**\n    *   **Self-Awareness:** Know your emotions and how they affect your behavior.\n    *   **Self-Regulation:** Manage your emotions effectively (e.g., don't react impulsively when angry).\n    *   **Motivation:** Be driven by intrinsic goals and a positive outlook.\n    *   **Empathy:** Understand and share the feelings of others.\n    *   **Social Skills:** Build rapport, communicate effectively, and manage conflict.\n\n**II. Communication Skills:**\n\n*   **Active Listening:**\n    *   **Pay Attention:** Focus on the speaker without interrupting or planning your response.\n    *   **Show That You're Listening:**  Use verbal cues (\"I see,\" \"Uh-huh\") and nonverbal cues (nodding, eye contact).\n    *   **Provide Feedback:** Paraphrase what you heard to ensure understanding (\"So, you're saying you felt...\").\n    *   **Defer Judgment:**  Listen without immediately judging or criticizing.\n    *   **Respond Appropriately:**  Offer thoughtful and relevant responses after the speaker has finished.\n\n*   **Assertive Communication:**\n    *   **Express Your Needs and Boundaries Clearly:**  State what you want and need",
+    "usage": {
+      "prompt_tokens": 9,
+      "completion_tokens": 497,
+      "total_tokens": 506
+    },
+    "created": 1754537099,
+    "latency_ms": 6711.9140625,
+    "raw_response": {
+      "id": "gen-1754537099-IKmkQ5Mvyeao9mBrOB0Z",
+      "provider": "Google",
+      "model": "google/gemini-2.0-flash-exp:free",
+      "object": "chat.completion",
+      "created": 1754537099,
+      "choices": [
+        {
+          "logprobs": null,
+          "finish_reason": "length",
+          "native_finish_reason": "MAX_TOKENS",
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "Building healthier relationships is a journey that requires self-awareness, effort, and a willingness to learn and grow. Here's a breakdown of key areas and practical steps you can take:\n\n**I. Understanding Yourself & Your Needs:**\n\n*   **Self-Reflection:**\n    *   **Identify Your Attachment Style:** Are you secure, anxious, avoidant, or disorganized? Understanding your attachment style helps you recognize your patterns in relationships.\n    *   **Know Your Values:** What's important to you in life and in relationships? (e.g., honesty, respect, loyalty, communication, shared interests).\n    *   **Recognize Your Needs:** What do you need from your relationships to feel fulfilled and supported? (e.g., emotional support, physical affection, quality time, intellectual stimulation).\n    *   **Acknowledge Your Weaknesses:** What are your less-than-ideal habits or tendencies in relationships? (e.g., defensiveness, jealousy, difficulty communicating).\n    *   **Practice Self-Compassion:** Be kind to yourself. Everyone makes mistakes. Focus on learning and growing.\n\n*   **Emotional Intelligence (EQ):**\n    *   **Self-Awareness:** Know your emotions and how they affect your behavior.\n    *   **Self-Regulation:** Manage your emotions effectively (e.g., don't react impulsively when angry).\n    *   **Motivation:** Be driven by intrinsic goals and a positive outlook.\n    *   **Empathy:** Understand and share the feelings of others.\n    *   **Social Skills:** Build rapport, communicate effectively, and manage conflict.\n\n**II. Communication Skills:**\n\n*   **Active Listening:**\n    *   **Pay Attention:** Focus on the speaker without interrupting or planning your response.\n    *   **Show That You're Listening:**  Use verbal cues (\"I see,\" \"Uh-huh\") and nonverbal cues (nodding, eye contact).\n    *   **Provide Feedback:** Paraphrase what you heard to ensure understanding (\"So, you're saying you felt...\").\n    *   **Defer Judgment:**  Listen without immediately judging or criticizing.\n    *   **Respond Appropriately:**  Offer thoughtful and relevant responses after the speaker has finished.\n\n*   **Assertive Communication:**\n    *   **Express Your Needs and Boundaries Clearly:**  State what you want and need",
+            "refusal": null,
+            "reasoning": null
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 9,
+        "completion_tokens": 497,
+        "total_tokens": 506
+      }
+    }
+  }
+}
