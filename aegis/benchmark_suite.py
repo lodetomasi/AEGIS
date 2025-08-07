@@ -12,12 +12,7 @@ from pathlib import Path
 from .task_generator import TaskGenerator, TaskInstance
 from .environment_simulator import EnvironmentSimulator, MockEnvironment
 from .reliability_calculator import ReliabilityCalculator, TestRun
-from ..utils.logging import get_logger
-from ..utils.metrics import MetricsCollector, timer_context
-from ..utils.llm_client import LLMClient
-
-
-logger = get_logger("aegis.benchmark")
+# Removed logger and utils dependencies for integration
 
 
 @dataclass

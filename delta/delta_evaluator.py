@@ -6,10 +6,7 @@ from dataclasses import dataclass
 from .baseline_simulator import BaselineSimulator, BaselineType, BaselineConfig
 from .comparative_analyzer import ComparativeAnalyzer, ComparisonResult
 from .harm_detector import HarmAmplificationDetector, HarmAssessment
-from ..utils.logging import get_logger
-
-
-logger = get_logger("delta.evaluator")
+# Removed logger dependency for integration
 
 
 @dataclass

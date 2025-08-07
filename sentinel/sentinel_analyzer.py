@@ -9,10 +9,7 @@ from .architecture_parser import ArchitectureParser, AgentArchitecture
 from .risk_scanner import RiskPatternScanner, RiskPattern
 from .vulnerability_detector import VulnerabilityDetector, Vulnerability
 from .ast_analyzer import ASTAnalyzer
-from ..utils.logging import get_logger
-
-
-logger = get_logger("sentinel.analyzer")
+# Removed logger dependency for integration
 
 
 @dataclass
@@ -57,9 +54,6 @@ class SentinelOutput:
     vulnerabilities: List[Vulnerability]
     vulnerability_summary: Dict[str, Any]
     
-    # Code vulnerabilities detected (if applicable)
-    code_vulnerabilities: Optional[Dict[str, Any]] = None
-    
     # Overall assessment
     overall_risk_score: float  # 0-10
     risk_level: str  # low, medium, high, critical
@@ -70,6 +64,9 @@ class SentinelOutput:
     
     # Detailed findings
     findings: Dict[str, Any]
+    
+    # Code vulnerabilities detected (if applicable)
+    code_vulnerabilities: Optional[Dict[str, Any]] = None
     
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary."""
@@ -116,7 +113,7 @@ class SentinelAnalyzer:
         Returns:
             Complete analysis output
         """
-        logger.info("Starting SENTINEL static analysis")
+        # Starting SENTINEL static analysis
         
         # Parse architecture
         if input_data.config_file:
@@ -126,13 +123,13 @@ class SentinelAnalyzer:
         
         # Detect architecture type
         architecture_type = self.architecture_parser.detect_architecture_type(architecture)
-        logger.info(f"Detected architecture type: {architecture_type}")
+        # Detected architecture type: {architecture_type}
         
         # Scan for risk patterns
         risk_patterns = []
         if input_data.check_risk_patterns:
             risk_patterns = self.risk_scanner.scan(architecture)
-            logger.info(f"Found {len(risk_patterns)} risk patterns")
+            # Found {len(risk_patterns)} risk patterns
         
         # Detect vulnerabilities
         vulnerabilities = []
@@ -140,14 +137,14 @@ class SentinelAnalyzer:
             if self.vulnerability_detector is None:
                 self.vulnerability_detector = VulnerabilityDetector(input_data.vuln_db_path)
             vulnerabilities = self.vulnerability_detector.detect(architecture)
-            logger.info(f"Found {len(vulnerabilities)} vulnerabilities")
+            # Found {len(vulnerabilities)} vulnerabilities
         
         # Analyze code vulnerabilities if code path provided
         code_vulnerabilities = None
         if input_data.check_code_vulnerabilities and input_data.code_path:
-            logger.info(f"Analyzing code at {input_data.code_path}")
+            # Analyzing code at {input_data.code_path}
             code_vulnerabilities = self.ast_analyzer.analyze_code(input_data.code_path)
-            logger.info(f"Found {code_vulnerabilities['total_vulnerabilities']} code vulnerabilities")
+            # Found {code_vulnerabilities['total_vulnerabilities']} code vulnerabilities
         
         # Calculate overall risk score
         overall_risk_score, risk_level = self._calculate_overall_risk(

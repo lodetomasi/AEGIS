@@ -12,7 +12,10 @@ from pathlib import Path
 from dataclasses import dataclass, asdict
 import backoff
 import time as time_module
-from .storage import FileSystemStorage
+try:
+    from .storage import FileSystemStorage
+except ImportError:
+    from storage import FileSystemStorage
 
 
 @dataclass

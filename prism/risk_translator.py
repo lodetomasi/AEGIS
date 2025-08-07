@@ -9,10 +9,7 @@ from .risk_mapper import RiskMapper, ErrorType
 from .context_weigher import ContextWeigher, Industry, Sensitivity
 from .risk_calculator import RiskCalculator, RiskAssessment
 from .industry_risk_models import IndustryRiskModelFactory
-from ..utils.logging import get_logger
-
-
-logger = get_logger("prism.translator")
+# Removed logger dependency for integration testing
 
 
 @dataclass
@@ -101,7 +98,7 @@ class RiskTranslator:
         Returns:
             Complete risk translation output
         """
-        logger.info(f"Translating risks for {input_data.industry} context")
+        # Translating risks for {input_data.industry} context
         
         # Parse context
         industry = self._parse_industry(input_data.industry)
