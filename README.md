@@ -363,7 +363,6 @@ If you use AETHER in your research, please cite:
   author={Lorenzo De Tomasi},
   year={2025},
   url={https://github.com/lodetomasi/AEGIS},
-  doi={10.5281/zenodo.xxxxxxx},
   note={lorenzo.detomasi@graduate.univaq.it}
 }
 ```
