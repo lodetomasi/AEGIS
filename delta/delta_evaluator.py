@@ -1,12 +1,15 @@
 """Main DELTA evaluation orchestrator."""
 
+import logging
 from typing import Dict, List, Any, Optional, Tuple
 from dataclasses import dataclass
 
 from .baseline_simulator import BaselineSimulator, BaselineType, BaselineConfig
 from .comparative_analyzer import ComparativeAnalyzer, ComparisonResult
 from .harm_detector import HarmAmplificationDetector, HarmAssessment
-# Removed logger dependency for integration
+
+# Setup logger
+logger = logging.getLogger(__name__)
 
 
 @dataclass

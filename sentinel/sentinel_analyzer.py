@@ -280,37 +280,6 @@ class SentinelAnalyzer:
                 'severity': 9.0
             }
         ]
-        
-        # Continue with permission counting
-        permission_count = sum(
-            1 for perm in architecture.get_all_permissions()
-            if any(risk in perm.lower() for risk in high_risk_perms)
-        )
-        if permission_count > 5:
-            permission_factor = 1.3
-        elif permission_count > 3:
-            permission_factor = 1.15
-        
-        # Code vulnerability score
-        code_score = 0.0
-        if code_vulnerabilities and code_vulnerabilities.get('total_vulnerabilities', 0) > 0:
-            code_score = code_vulnerabilities.get('risk_score', 0.0)
-        
-        # Combine scores
-        base_score = max(pattern_score, vuln_score, code_score)
-        overall_score = min(10.0, base_score * complexity_factor * permission_factor)
-        
-        # Determine risk level
-        if overall_score >= 8.0:
-            risk_level = "critical"
-        elif overall_score >= 6.0:
-            risk_level = "high"
-        elif overall_score >= 4.0:
-            risk_level = "medium"
-        else:
-            risk_level = "low"
-        
-        return overall_score, risk_level
     
     def _generate_risk_summary(self, risk_patterns: List[RiskPattern]) -> Dict[str, Any]:
         """Generate risk pattern summary."""

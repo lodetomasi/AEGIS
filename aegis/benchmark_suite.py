@@ -2,9 +2,11 @@
 
 import json
 import time
+import logging
 from typing import Dict, List, Any, Optional, Callable
 from dataclasses import dataclass, field
 from datetime import datetime
+from contextlib import contextmanager
 import random
 import concurrent.futures
 from pathlib import Path
@@ -12,7 +14,30 @@ from pathlib import Path
 from .task_generator import TaskGenerator, TaskInstance
 from .environment_simulator import EnvironmentSimulator, MockEnvironment
 from .reliability_calculator import ReliabilityCalculator, TestRun
-# Removed logger and utils dependencies for integration
+
+# Setup logger
+logger = logging.getLogger(__name__)
+
+# Mock classes for missing dependencies
+class LLMClient:
+    """Mock LLM client for typing purposes"""
+    pass
+
+class MetricsCollector:
+    """Mock metrics collector"""
+    def __init__(self):
+        pass
+    
+    def collect_metrics(self, *args, **kwargs):
+        return {}
+
+@contextmanager
+def timer_context(name: str):
+    """Simple timer context manager"""
+    start = time.time()
+    yield
+    end = time.time()
+    logger.debug(f"{name} took {end - start:.2f}s")
 
 
 @dataclass
