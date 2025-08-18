@@ -1,6 +1,7 @@
 """
 Dynamic Adversarial Detection using LLM
 """
+import json
 
 class AdversarialDetector:
     """Detect adversarial tactics dynamically using LLM analysis"""

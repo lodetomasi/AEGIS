@@ -58,6 +58,7 @@ class RealWorldChallengeTest:
         try:
             from prism.risk_translator import RiskTranslator, RiskTranslationInput
             self.risk_translator = RiskTranslator()
+            self.RiskTranslationInput = RiskTranslationInput  # Make accessible
             self.prism_available = True
         except:
             self.prism_available = False
@@ -248,7 +249,7 @@ class RealWorldChallengeTest:
             print(f"📊 Failure Rate: {failure_rate*100:.1f}%")
             
             # Translate to business risk
-            risk_input = RiskTranslationInput(
+            risk_input = self.RiskTranslationInput(
                 errors=[],
                 error_rates={'aggregate': failure_rate},
                 industry=industry,

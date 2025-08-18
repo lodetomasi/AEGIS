@@ -162,11 +162,10 @@ Generated: {datetime.utcnow().isoformat()}
 """
         
         for pattern, data in sorted(learned.items(), key=lambda x: x[1]['confidence'], reverse=True):
-            report += f"\n### {pattern}
-- Confidence: {data['confidence']:.2f}
-- Occurrences: {data['occurrences']}
-- Discovered: {data['discovered']}
-"
+            report += f"\n### {pattern}\n"
+            report += f"- Confidence: {data['confidence']:.2f}\n"
+            report += f"- Occurrences: {data['occurrences']}\n"
+            report += f"- Discovered: {data['discovered']}\n"
         
         # Recent evolution
         if history:
