@@ -46,6 +46,9 @@ Thumbs.db
 *.key
 secrets.json
 
+# Development files (local only)
+CLAUDE.md
+
 # Cache and temporary files
 .cache/
 *.tmp
