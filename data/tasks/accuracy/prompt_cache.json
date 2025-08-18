@@ -1,6 +1,7 @@
 {
   "prompts": [
-    "Assume you are a renowned astrophysicist who has just discovered a new type of star that emits a unique spectrum of light, unlike any other known star. This star, let's call it X-Type Star, emits a spectrum that falls right in the middle of the known spectrums of Red Giants and Blue Dwarfs, but has a unique signature that is only visible in the ultraviolet spectrum. Given this information, how do you classify this new star according to the standard stellar classification?"
+    "Assume you are a renowned astrophysicist who has just discovered a new type of star that emits a unique spectrum of light, unlike any other known star. This star, let's call it X-Type Star, emits a spectrum that falls right in the middle of the known spectrums of Red Giants and Blue Dwarfs, but has a unique signature that is only visible in the ultraviolet spectrum. Given this information, how do you classify this new star according to the standard stellar classification?",
+    "Pretend you are a highly respected marine biologist who has recently discovered a new species of sea creature that displays characteristics of both a fish and a mammal. This creature, which you've named 'AquaMammalis', has the ability to breathe underwater like a fish, yet it gives birth to live young and nurses them with milk, much like a mammal. Additionally, it has a unique body structure that is unlike any other known sea creature. How would you classify this new species, considering it doesn't neatly fit into any existing taxonomic category?"
   ],
-  "last_updated": "2025-08-07T20:27:01.613602"
+  "last_updated": "2025-08-18T17:54:14.867816"
 }

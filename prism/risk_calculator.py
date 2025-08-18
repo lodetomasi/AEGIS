@@ -31,6 +31,10 @@ class RiskAssessment:
     
     # Metadata
     assessment_id: str
+    
+    # Financial risk (with defaults)
+    total_financial_risk: float = 0.0  # Total financial exposure in dollars
+    risk_level: str = ""  # Risk level category (LOW, MEDIUM, HIGH, CRITICAL)
     timestamp: datetime = field(default_factory=datetime.utcnow)
     context: Dict[str, Any] = field(default_factory=dict)
     
@@ -52,7 +56,8 @@ class RiskAssessment:
         return {
             'assessment_id': self.assessment_id,
             'risk_score': self.risk_score,
-            'risk_level': self.get_risk_level(),
+            'risk_level': self.risk_level if self.risk_level else self.get_risk_level(),
+            'total_financial_risk': self.total_financial_risk,
             'probability': self.probability,
             'impact': self.impact,
             'confidence_intervals': {
@@ -142,11 +147,29 @@ class RiskCalculator:
         # Generate mitigation recommendations
         mitigations = self._generate_mitigations(top_risks, risk_by_category)
         
+        # Calculate financial risk (simplified - could be industry-specific)
+        base_financial_risk = 100000  # Base exposure
+        total_financial_risk = base_financial_risk * overall_probability * (overall_impact / 10.0)
+        
+        # Determine risk level
+        if overall_risk >= 8:
+            risk_level = "CRITICAL"
+        elif overall_risk >= 6:
+            risk_level = "HIGH"
+        elif overall_risk >= 4:
+            risk_level = "MEDIUM"
+        elif overall_risk >= 2:
+            risk_level = "LOW"
+        else:
+            risk_level = "MINIMAL"
+        
         assessment = RiskAssessment(
             assessment_id=assessment_id,
             risk_score=overall_risk,
             probability=overall_probability,
             impact=overall_impact,
+            total_financial_risk=total_financial_risk,
+            risk_level=risk_level,
             risk_confidence_interval=risk_ci,
             probability_confidence_interval=prob_ci,
             risk_by_category=risk_by_category,

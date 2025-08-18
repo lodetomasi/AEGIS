@@ -37,6 +37,7 @@ class ImpactType(Enum):
     CUSTOMER_HARM = "customer_harm"
     OPERATIONAL_FAILURE = "operational_failure"
     COMPETITIVE_DISADVANTAGE = "competitive_disadvantage"
+    SECURITY_BYPASS = "security_bypass"
 
 
 @dataclass

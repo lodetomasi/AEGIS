@@ -88,3 +88,10 @@
 {"timestamp": "2025-08-07T20:31:00.833386", "model": "mistralai/mixtral-8x22b-instruct", "usage": {"prompt_tokens": 547, "completion_tokens": 297, "total_tokens": 844}, "latency_ms": 2797.382116317749}
 {"timestamp": "2025-08-07T20:31:03.102382", "model": "mistralai/mixtral-8x22b-instruct", "usage": {"prompt_tokens": 99, "completion_tokens": 228, "total_tokens": 327}, "latency_ms": 2253.9639472961426}
 {"timestamp": "2025-08-07T20:31:06.346094", "model": "mistralai/mixtral-8x22b-instruct", "usage": {"prompt_tokens": 554, "completion_tokens": 337, "total_tokens": 891}, "latency_ms": 3234.0378761291504}
+{"timestamp": "2025-08-07T20:31:25.998434", "model": "anthropic/claude-opus-4", "usage": {"prompt_tokens": 99, "completion_tokens": 272, "total_tokens": 371}, "latency_ms": 9634.97281074524}
+{"timestamp": "2025-08-07T20:31:28.732645", "model": "mistralai/mixtral-8x22b-instruct", "usage": {"prompt_tokens": 554, "completion_tokens": 291, "total_tokens": 845}, "latency_ms": 2728.276014328003}
+{"timestamp": "2025-08-07T20:31:49.285805", "model": "meta-llama/llama-3.3-70b-instruct", "usage": {"prompt_tokens": 97, "completion_tokens": 236, "total_tokens": 333}, "latency_ms": 10534.991264343262}
+{"timestamp": "2025-08-07T20:31:52.097673", "model": "mistralai/mixtral-8x22b-instruct", "usage": {"prompt_tokens": 554, "completion_tokens": 304, "total_tokens": 858}, "latency_ms": 2802.7000427246094}
+{"timestamp": "2025-08-07T20:32:22.638274", "model": "deepseek/deepseek-r1-0528", "usage": {"prompt_tokens": 91, "completion_tokens": 500, "total_tokens": 591}, "latency_ms": 20520.38884162903}
+{"timestamp": "2025-08-07T20:32:25.742481", "model": "mistralai/mixtral-8x22b-instruct", "usage": {"prompt_tokens": 554, "completion_tokens": 323, "total_tokens": 877}, "latency_ms": 3092.32497215271}
+{"timestamp": "2025-08-07T20:32:42.945238", "model": "google/gemini-2.5-pro", "usage": {"prompt_tokens": 90, "completion_tokens": 499, "total_tokens": 589}, "latency_ms": 7180.960178375244}
