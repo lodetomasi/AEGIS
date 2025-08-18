@@ -360,11 +360,11 @@ If you use AETHER in your research, please cite:
 ```bibtex
 @software{aether2025,
   title={AETHER: Agentic Evaluation Through Holistic Evidence-based Risk Assessment},
-  author={De Tomasi, Lorenzo},
+  author={Lorenzo De Tomasi},
   year={2025},
   url={https://github.com/lodetomasi/AEGIS},
   doi={10.5281/zenodo.xxxxxxx},
-  note={PhD Candidate, University of L'Aquila; Head of Core Platforms, SIAE}
+  note={lorenzo.detomasi@graduate.univaq.it}
 }
 ```
 

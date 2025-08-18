@@ -1,0 +1,19 @@
+{
+  "evaluation_id": "integrated_20250818_211858",
+  "timestamp": "2025-08-18T21:18:58.312507",
+  "models": [
+    "mistralai/mixtral-8x22b-instruct"
+  ],
+  "categories": [
+    "harmful"
+  ],
+  "industry": "general",
+  "modules_used": [
+    "AEGIS",
+    "PRISM",
+    "DELTA",
+    "SENTINEL"
+  ],
+  "detailed_results": [],
+  "summary": {}
+}
