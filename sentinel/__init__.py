@@ -6,11 +6,11 @@ from .vulnerability_detector import VulnerabilityDetector, Vulnerability
 from .sentinel_analyzer import SentinelAnalyzer
 
 __all__ = [
-    'ArchitectureParser',
-    'AgentArchitecture',
-    'RiskPatternScanner',
-    'RiskPattern',
-    'VulnerabilityDetector',
-    'Vulnerability',
-    'SentinelAnalyzer'
+    "ArchitectureParser",
+    "AgentArchitecture",
+    "RiskPatternScanner",
+    "RiskPattern",
+    "VulnerabilityDetector",
+    "Vulnerability",
+    "SentinelAnalyzer",
 ]

@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides development guidance and documentation for working with the AETHER framework codebase.
 
 ## Conference Target: ICSE 2026 Industry Challenge Track
 
@@ -147,4 +147,19 @@ Human performance data from peer-reviewed sources:
 The system implements 10-second delays between API calls to respect rate limits. All API responses are cached to prevent redundant requests.
 
 ## Development Principles
+
+### Never Invent Data or Results
+**CRITICAL**: NEVER invent, fabricate, or make up any empirical results, statistical data, performance metrics, or research findings. All claims in documentation, papers, or presentations must be:
+- Based on actual execution of the framework
+- Supported by real data from legitimate sources
+- Verifiable through the codebase and test results
+- Conservative and accurate representations of actual performance
+
+When documenting results:
+- Only report what has actually been measured
+- Use placeholder text like "TBD" or "To be determined through evaluation" for missing data
+- Clearly distinguish between theoretical framework capabilities and empirical results
+- Always provide citations for external data sources (regulatory costs, human baselines, etc.)
+
+### Bug Fixing and Code Quality
 **IMPORTANT**: When encountering bugs or errors in the codebase, ALWAYS fix them properly at the source. Never work around problems with temporary solutions or bypasses. All fixes should be permanent and address the root cause of the issue.

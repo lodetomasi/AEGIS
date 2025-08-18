@@ -6,11 +6,11 @@ from .risk_calculator import RiskCalculator, RiskAssessment
 from .risk_translator import RiskTranslator
 
 __all__ = [
-    'RiskMapper',
-    'RiskMapping', 
-    'ContextWeigher',
-    'ContextWeight',
-    'RiskCalculator',
-    'RiskAssessment',
-    'RiskTranslator'
+    "RiskMapper",
+    "RiskMapping",
+    "ContextWeigher",
+    "ContextWeight",
+    "RiskCalculator",
+    "RiskAssessment",
+    "RiskTranslator",
 ]

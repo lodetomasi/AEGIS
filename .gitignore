@@ -19,62 +19,60 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-MANIFEST
 
-# Virtual Environment
+# Virtual environments
+.venv/
 venv/
 ENV/
 env/
-.venv
 
-# IDE
+# IDEs
 .vscode/
 .idea/
 *.swp
 *.swo
-*~
 
 # OS
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 
-# Environment variables
+# API Keys and Secrets
 .env
-.env.local
-.env.*.local
+*.key
+secrets.json
 
-# Logs
-*.log
-logs/
+# Cache and temporary files
+.cache/
+*.tmp
+*.temp
 
-# Testing
-.coverage
+# Coverage reports
 htmlcov/
-.tox/
-.pytest_cache/
-.hypothesis/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
 
 # Jupyter
 .ipynb_checkpoints
 
-# Data and Results (keep structure but not content)
+# mypy
+.mypy_cache/
+
+# pytest
+.pytest_cache/
+
+# Results and logs
+*.log
+results/quick_test_*.json
+results/challenge_test_*.json
+
+# Data cache (keep structure but not content)
 data/cache/completions/*.json
 data/cache/usage/*.jsonl
-results/challenge_tests/*.json
-results/evaluations/*.json
-results/reports/*.html
-
-# Temporary files
-*.tmp
-*.bak
-*.swp
-*~
-
-# API Keys and Secrets
-*.key
-*.pem
-secrets/
-
-# Docker
-*.pid
-docker-compose.override.yml
+data/tasks/*/[a-f0-9]*.json

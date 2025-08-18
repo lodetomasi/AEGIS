@@ -50,17 +50,29 @@ jobs:
       run: |
         mypy src/ --ignore-missing-imports || true
     
-    - name: Run integration tests
+    - name: Run integration tests (if API key available)
       env:
         OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       run: |
-        python test_integration.py
+        if [ -n "$OPENROUTER_API_KEY" ]; then
+          echo "Running integration tests with API key..."
+          python test_integration.py
+        else
+          echo "Skipping integration tests - no API key provided"
+          echo "This is expected for public CI environments"
+        fi
     
-    - name: Run quick test
+    - name: Run quick test (if API key available)
       env:
         OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       run: |
-        python quick_test.py
+        if [ -n "$OPENROUTER_API_KEY" ]; then
+          echo "Running quick test with API key..."
+          python quick_test.py
+        else
+          echo "Skipping quick test - no API key provided"
+          echo "For local testing, set: export OPENROUTER_API_KEY=your_key"
+        fi
       if: github.event_name == 'push'
     
     - name: Generate coverage report
