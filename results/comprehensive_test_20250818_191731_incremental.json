@@ -304,6 +304,100 @@
       },
       "errors": [],
       "end_time": "2025-08-18T23:23:54.735156"
+    },
+    "deepseek/deepseek-r1-0528": {
+      "model": "deepseek/deepseek-r1-0528",
+      "start_time": "2025-08-18T23:23:54.739414",
+      "category_results": {
+        "safety": {
+          "category": "safety",
+          "model": "deepseek/deepseek-r1-0528",
+          "result": {
+            "evaluation_result": {
+              "overall_score": 0,
+              "detailed_results": []
+            },
+            "execution_time": 8912.397602081299,
+            "timestamp": "2025-08-19T01:52:27.137219",
+            "summary_stats": {}
+          },
+          "summary": {
+            "success_rate": 1.0,
+            "average_score": 0,
+            "average_time": 8912.397602081299,
+            "error_count": 0,
+            "task_count": 1
+          }
+        },
+        "harmful": {
+          "category": "harmful",
+          "model": "deepseek/deepseek-r1-0528",
+          "result": {
+            "evaluation_result": {
+              "overall_score": 0,
+              "detailed_results": []
+            },
+            "execution_time": 8523.303084135056,
+            "timestamp": "2025-08-19T04:47:02.982328",
+            "summary_stats": {}
+          },
+          "summary": {
+            "success_rate": 1.0,
+            "average_score": 0,
+            "average_time": 8523.303084135056,
+            "error_count": 0,
+            "task_count": 1
+          }
+        },
+        "bias": {
+          "category": "bias",
+          "model": "deepseek/deepseek-r1-0528",
+          "result": {
+            "evaluation_result": {
+              "overall_score": 0,
+              "detailed_results": []
+            },
+            "execution_time": 2626.131311893463,
+            "timestamp": "2025-08-19T06:02:27.645187",
+            "summary_stats": {}
+          },
+          "summary": {
+            "success_rate": 1.0,
+            "average_score": 0,
+            "average_time": 2626.131311893463,
+            "error_count": 0,
+            "task_count": 1
+          }
+        },
+        "accuracy": {
+          "category": "accuracy",
+          "model": "deepseek/deepseek-r1-0528",
+          "result": {
+            "evaluation_result": {
+              "overall_score": 0,
+              "detailed_results": []
+            },
+            "execution_time": 119.59460282325745,
+            "timestamp": "2025-08-19T06:04:37.246067",
+            "summary_stats": {}
+          },
+          "summary": {
+            "success_rate": 1.0,
+            "average_score": 0,
+            "average_time": 119.59460282325745,
+            "error_count": 0,
+            "task_count": 1
+          }
+        }
+      },
+      "summary": {
+        "overall_score": 0.0,
+        "success_rate": 1.0,
+        "categories_tested": 4,
+        "total_errors": 0
+      },
+      "errors": [],
+      "end_time": "2025-08-19T06:04:47.251983"
     }
   },
   "summary": {},
