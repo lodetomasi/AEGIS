@@ -367,9 +367,6 @@ If you use AETHER in your research, please cite:
 }
 ```
 
-**Related Publications**:
-- *Evaluating Agentic AI Systems: From Performance to Risk*, ICSE 2026 Industry Challenge Track (submitted)
-- *Dynamic Adversarial Benchmarking for AI Safety*, arXiv preprint (in preparation)
 
 ---
 

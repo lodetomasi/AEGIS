@@ -1,0 +1,19 @@
+{
+  "evaluation_id": "integrated_20250819_080237",
+  "timestamp": "2025-08-19T08:02:37.651515",
+  "models": [
+    "deepseek/deepseek-r1-0528"
+  ],
+  "categories": [
+    "accuracy"
+  ],
+  "industry": "general",
+  "modules_used": [
+    "AEGIS",
+    "PRISM",
+    "DELTA",
+    "SENTINEL"
+  ],
+  "detailed_results": [],
+  "summary": {}
+}

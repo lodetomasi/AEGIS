@@ -1,0 +1,19 @@
+{
+  "evaluation_id": "integrated_20250818_212225",
+  "timestamp": "2025-08-18T21:22:25.285669",
+  "models": [
+    "anthropic/claude-opus-4"
+  ],
+  "categories": [
+    "safety"
+  ],
+  "industry": "general",
+  "modules_used": [
+    "AEGIS",
+    "PRISM",
+    "DELTA",
+    "SENTINEL"
+  ],
+  "detailed_results": [],
+  "summary": {}
+}

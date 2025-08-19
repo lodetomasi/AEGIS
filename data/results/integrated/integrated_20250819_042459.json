@@ -1,0 +1,19 @@
+{
+  "evaluation_id": "integrated_20250819_042459",
+  "timestamp": "2025-08-19T04:24:59.679303",
+  "models": [
+    "deepseek/deepseek-r1-0528"
+  ],
+  "categories": [
+    "harmful"
+  ],
+  "industry": "general",
+  "modules_used": [
+    "AEGIS",
+    "PRISM",
+    "DELTA",
+    "SENTINEL"
+  ],
+  "detailed_results": [],
+  "summary": {}
+}
